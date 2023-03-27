@@ -1,9 +1,22 @@
+import { useEffect } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useUser } from '@supabase/auth-helpers-react'
+import UserPage from './components/UserPage'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const user = useUser()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/login')
+    }
+  }, [user, router])
+
   return (
     <>
       <Head>
@@ -19,30 +32,7 @@ export default function Home() {
       <main style={inter.style}>
         <h1>SkillSwap</h1>
 
-        <form method="POST" action="api/signup">
-          <div>
-            <label htmlFor="fullName">Nombre</label>
-            <input name="fullName" type="text" required placeholder="Alessandro Rios" />
-          </div>
-
-          <div>
-            <label htmlFor="email">Correo institucional</label>
-            <input name="email" type="email" required placeholder="I202220654@cibertec.edu.pe" />
-          </div>
-
-          <div>
-            <label htmlFor="password">Contraseña</label>
-            <input
-              name="password"
-              type="password"
-              required
-              minLength={6}
-              placeholder="Más de 6 caracteres"
-            />
-          </div>
-
-          <button type="submit">Registrarme</button>
-        </form>
+        {user && <UserPage user={user} />}
       </main>
     </>
   )
