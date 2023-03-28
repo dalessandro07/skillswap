@@ -1,4 +1,4 @@
-import { UserData } from '@/types'
+import { UserDataType } from '@/types'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
@@ -12,7 +12,7 @@ export default function useRegister() {
     register,
     handleSubmit,
     formState: { errors, isLoading }
-  } = useForm<UserData>({
+  } = useForm<UserDataType>({
     mode: 'onChange',
     defaultValues: {
       fullName: '',
@@ -22,7 +22,7 @@ export default function useRegister() {
     }
   })
 
-  async function handleRegister(userData: UserData) {
+  async function handleRegister(userData: UserDataType) {
     const { username, fullName, email, password } = userData
 
     if (!username || !fullName || !email || !password) {
@@ -52,7 +52,6 @@ export default function useRegister() {
       }
 
       if (data.user) {
-        console.log(data)
         toast.success(`¡Confirma tu cuenta, te enviamos un correo a ${data.user.email}!`, {
           duration: 3500
         })

@@ -33,8 +33,6 @@ const REGISTER_FIELDS: InputFieldsType[] = [
 export default function Register() {
   const { handleSubmit, handleRegister, isLoading, register, errors } = useRegister()
 
-  console.log(errors)
-
   return (
     <form onSubmit={handleSubmit(handleRegister)}>
       <h1>Crea tu cuenta</h1>

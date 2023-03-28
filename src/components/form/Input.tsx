@@ -7,11 +7,11 @@ export default function Input({ fields, children, register, errors }: InputProps
     <div className="flex flex-col gap-2">
       <label htmlFor={fields.name}>{children}</label>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col py-2">
         <input
           className={`
           border-2 rounded-md p-2 text-black
-          ${hasError ? 'border-red-500 bg-rose-100' : 'border-gray-300'}
+          ${hasError ? 'border-red-500 bg-rose-200' : 'border-gray-300'}
         `}
           {...register(fields.name, {
             required: {

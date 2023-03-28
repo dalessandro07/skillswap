@@ -8,7 +8,9 @@ export default function Header() {
     <header className="flex items-center justify-between w-full py-5">
       <Link href="/">SkillSwap</Link>
 
-      <section>
+      <section className="flex items-center gap-5">
+        <Link href="/projects">Proyectos</Link>
+
         {user ? (
           <Link href="/user">{user?.user_metadata.username}</Link>
         ) : (

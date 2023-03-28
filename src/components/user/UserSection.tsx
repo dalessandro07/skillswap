@@ -1,9 +1,8 @@
 import SignOut from '../auth/SignOut'
 import type { User } from '@supabase/supabase-js'
+import Link from 'next/link'
 
 export default function UserPage({ user }: { user: User }) {
-  console.log(user)
-
   return (
     <section>
       <article className="flex items-center gap-1">
@@ -26,7 +25,10 @@ export default function UserPage({ user }: { user: User }) {
       <p>Nombre: {user.user_metadata.fullName}</p>
       <p>Correo: {user.email}</p>
 
-      <SignOut />
+      <article className="flex gap-4">
+        <Link href="/projects/new_project">Crear un proyecto</Link>
+        <SignOut />
+      </article>
     </section>
   )
 }

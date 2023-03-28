@@ -1,4 +1,4 @@
-import { UserData } from '@/types'
+import { UserDataType } from '@/types'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
@@ -12,7 +12,7 @@ export default function useLogin() {
     register,
     handleSubmit,
     formState: { errors, isLoading }
-  } = useForm<Partial<UserData>>({
+  } = useForm<Partial<UserDataType>>({
     mode: 'onChange',
     defaultValues: {
       email: '',
@@ -20,7 +20,7 @@ export default function useLogin() {
     }
   })
 
-  async function handleLogin(userData: Partial<UserData>) {
+  async function handleLogin(userData: Partial<UserDataType>) {
     const { email, password } = userData
 
     if (!email || !password) {
