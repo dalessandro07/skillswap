@@ -1,8 +1,5 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
 import Login from '../components/auth/Login'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function LoginPage() {
   return (
@@ -17,9 +14,7 @@ export default function LoginPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main style={inter.style}>
-        <Login />
-      </main>
+      <Login />
     </>
   )
 }

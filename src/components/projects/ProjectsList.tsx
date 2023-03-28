@@ -6,7 +6,7 @@ export default function ProjectsList() {
   console.log(projects as ProjectType[])
 
   return (
-    <section className="p-5">
+    <section>
       <h1 className="text-2xl font-bold">Proyectos</h1>
 
       <div className="flex flex-wrap gap-5 py-5">

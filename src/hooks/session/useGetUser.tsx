@@ -6,9 +6,8 @@ export default function useGetUser() {
   const user = useUser()
 
   useEffect(() => {
-    if (user) {
-      setLoading(false)
-    }
+    if (user) setLoading(false)
+    setTimeout(() => setLoading(false), 1000)
   }, [user])
 
   return {

@@ -1,31 +1,46 @@
 import Link from 'next/link'
 import useLogin from '@/hooks/session/useLogin'
+import Input from '../form/Input'
+import type { InputFieldsType } from '@/types'
+
+const LOGIN_FIELDS: InputFieldsType[] = [
+  {
+    name: 'email',
+    type: 'email',
+    placeholder: 'i202312345@cibertec.edu.pe',
+    label: 'Correo institucional'
+  },
+  {
+    name: 'password',
+    type: 'password',
+    placeholder: 'Más de 6 caracteres',
+    label: 'Contraseña'
+  }
+]
 
 export default function Login() {
-  const { handleLogin, loading } = useLogin()
+  const { handleSubmit, handleLogin, isLoading, register, errors } = useLogin()
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleSubmit(handleLogin)}>
       <h1>Inicia sesión en SkillSwap</h1>
 
-      <div>
-        <label htmlFor="email">Correo institucional</label>
-        <input name="email" type="email" required placeholder="i202312345@cibertec.edu.pe" />
-      </div>
+      {LOGIN_FIELDS.map(({ name, type, placeholder, label }) => (
+        <Input
+          register={register}
+          errors={errors}
+          key={name}
+          fields={{
+            name,
+            type,
+            placeholder
+          }}>
+          {label}
+        </Input>
+      ))}
 
-      <div>
-        <label htmlFor="password">Contraseña</label>
-        <input
-          name="password"
-          type="password"
-          required
-          minLength={6}
-          placeholder="Más de 6 caracteres"
-        />
-      </div>
-
-      <button disabled={loading} type="submit">
-        {loading ? 'Ingresando...' : 'Iniciar sesión'}
+      <button disabled={isLoading} type="submit">
+        {isLoading ? 'Ingresando...' : 'Iniciar sesión'}
       </button>
       <Link style={{ color: '#f90' }} href="/register">
         Registrarme

@@ -1,14 +1,7 @@
 import Head from 'next/head'
-import UserPage from '../components/user/UserPage'
-import { Inter } from 'next/font/google'
-import useGetUser from '@/hooks/session/useGetUser'
 import ProjectsList from '@/components/projects/ProjectsList'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export default function Home() {
-  const { user, loading } = useGetUser()
-
   return (
     <>
       <Head>
@@ -21,11 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main style={inter.style}>
-        <section>{user && <UserPage user={user} loading={loading} />}</section>
-
-        <ProjectsList />
-      </main>
+      <ProjectsList />
     </>
   )
 }

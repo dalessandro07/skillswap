@@ -1,28 +1,33 @@
-import { useState } from 'react'
+import { UserData } from '@/types'
+import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { toast } from 'react-hot-toast'
 
 export default function useLogin() {
-  const [loading, setLoading] = useState(false)
+  const supabaseClient = useSupabaseClient()
   const router = useRouter()
 
-  const supabaseClient = useSupabaseClient()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isLoading }
+  } = useForm<Partial<UserData>>({
+    mode: 'onChange',
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  })
 
-  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-
-    const form = e.currentTarget
-    const formData = new FormData(form)
-    const { email, password } = Object.fromEntries(formData.entries())
+  async function handleLogin(userData: Partial<UserData>) {
+    const { email, password } = userData
 
     if (!email || !password) {
       return
     }
 
     try {
-      setLoading(true)
-
       const {
         data: { user },
         error
@@ -31,14 +36,12 @@ export default function useLogin() {
         password: password as string
       })
 
-      setLoading(false)
-
       if (error) {
         return toast.error(error.message)
       }
 
       if (user) {
-        toast.success(`¡Bienvenido ${user.user_metadata.fullName}!`)
+        toast.success(`¡Bienvenido ${user.user_metadata.username}!`)
       }
 
       router.push('/')
@@ -49,6 +52,9 @@ export default function useLogin() {
 
   return {
     handleLogin,
-    loading
+    isLoading,
+    register,
+    handleSubmit,
+    errors
   }
 }

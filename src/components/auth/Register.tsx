@@ -1,37 +1,60 @@
 import Link from 'next/link'
 import useRegister from '@/hooks/session/useRegister'
+import Input from '../form/Input'
+import type { InputFieldsType } from '@/types'
+
+const REGISTER_FIELDS: InputFieldsType[] = [
+  {
+    name: 'fullName',
+    type: 'text',
+    placeholder: 'Alessandro Rios',
+    label: 'Nombres completos'
+  },
+  {
+    name: 'username',
+    type: 'text',
+    placeholder: 'dalessandro07',
+    label: 'Nombre de usuario'
+  },
+  {
+    name: 'email',
+    type: 'email',
+    placeholder: 'I202312345@cibertec.edu.pe',
+    label: 'Correo institucional'
+  },
+  {
+    name: 'password',
+    type: 'password',
+    placeholder: 'Más de 6 caracteres',
+    label: 'Contraseña'
+  }
+]
 
 export default function Register() {
-  const { handleRegister, loading } = useRegister()
+  const { handleSubmit, handleRegister, isLoading, register, errors } = useRegister()
+
+  console.log(errors)
 
   return (
-    <form onSubmit={handleRegister}>
+    <form onSubmit={handleSubmit(handleRegister)}>
       <h1>Crea tu cuenta</h1>
 
-      <div>
-        <label htmlFor="fullName">Nombre</label>
-        <input name="fullName" type="text" required placeholder="Alessandro Rios" />
-      </div>
+      <section className="flex flex-col gap-2 my-5">
+        {REGISTER_FIELDS.map(({ name, type, placeholder, label }) => (
+          <Input
+            key={name}
+            register={register}
+            errors={errors}
+            fields={{ name, type, placeholder }}>
+            {label}
+          </Input>
+        ))}
+      </section>
 
-      <div>
-        <label htmlFor="email">Correo institucional</label>
-        <input name="email" type="email" required placeholder="i202312345@cibertec.edu.pe" />
-      </div>
-
-      <div>
-        <label htmlFor="password">Contraseña</label>
-        <input
-          name="password"
-          type="password"
-          required
-          minLength={6}
-          placeholder="Más de 6 caracteres"
-        />
-      </div>
-
-      <button disabled={loading} type="submit">
-        {loading ? 'Registrando...' : 'Registrarme'}
+      <button disabled={isLoading} type="submit">
+        {isLoading ? 'Registrando...' : 'Registrarme'}
       </button>
+
       <Link style={{ color: '#f90' }} href="/login">
         Iniciar sesión
       </Link>

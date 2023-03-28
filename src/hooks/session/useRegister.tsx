@@ -1,49 +1,61 @@
-import { useState } from 'react'
+import { UserData } from '@/types'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
-import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/router'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
 
 export default function useRegister() {
-  const [loading, setLoading] = useState(false)
+  const supabaseClient = useSupabaseClient()
   const router = useRouter()
 
-  const supabaseClient = useSupabaseClient()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isLoading }
+  } = useForm<UserData>({
+    mode: 'onChange',
+    defaultValues: {
+      fullName: '',
+      username: '',
+      email: '',
+      password: ''
+    }
+  })
 
-  async function handleRegister(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  async function handleRegister(userData: UserData) {
+    const { username, fullName, email, password } = userData
 
-    const form = e.currentTarget
-    const formData = new FormData(form)
-    const { fullName, email, password } = Object.fromEntries(formData.entries())
-
-    if (!fullName || !email || !password) {
+    if (!username || !fullName || !email || !password) {
       return
     }
 
     try {
-      setLoading(true)
-
-      const {
-        data: { user },
-        error
-      } = await supabaseClient.auth.signUp({
+      const { data, error } = await supabaseClient.auth.signUp({
         email: email as string,
         password: password as string,
         options: {
           data: {
-            fullName
+            fullName,
+            username
           }
         }
       })
-
-      setLoading(false)
 
       if (error) {
         return toast.error(error.message)
       }
 
-      if (user) {
-        toast.success(`¡Confirma tu cuenta, te enviamos un correo a ${user.email}!`)
+      if (data.user?.aud === 'authenticated') {
+        toast.error('¡Ya existe una cuenta con estos datos, inicia sesión!')
+        router.push('/login')
+        return
+      }
+
+      if (data.user) {
+        console.log(data)
+        toast.success(`¡Confirma tu cuenta, te enviamos un correo a ${data.user.email}!`, {
+          duration: 3500
+        })
       }
 
       router.push('/login')
@@ -54,6 +66,9 @@ export default function useRegister() {
 
   return {
     handleRegister,
-    loading
+    isLoading,
+    register,
+    handleSubmit,
+    errors
   }
 }
