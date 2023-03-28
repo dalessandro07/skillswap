@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import useLogin from '@/hooks/useLogin'
+import useLogin from '@/hooks/session/useLogin'
 
 export default function Login() {
   const { handleLogin, loading } = useLogin()
@@ -10,7 +10,7 @@ export default function Login() {
 
       <div>
         <label htmlFor="email">Correo institucional</label>
-        <input name="email" type="email" required placeholder="I202220654@cibertec.edu.pe" />
+        <input name="email" type="email" required placeholder="i202312345@cibertec.edu.pe" />
       </div>
 
       <div>

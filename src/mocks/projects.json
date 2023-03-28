@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "image": "https://i.imgur.com/hodj9s3.jpg",
+    "title": "Yoga Retreat",
+    "category": "Wellness",
+    "createdAt": "2021-07-01 10:15:00",
+    "creator": "123",
+    "updatedAt": "2021-07-10 09:30:00",
+    "description": "A project to start a yoga retreat center in the mountains of Colorado"
+  },
+  {
+    "id": "2",
+    "image": "https://i.imgur.com/hodj9s3.jpg",
+    "title": "Coding Bootcamp",
+    "category": "Education",
+    "createdAt": "2021-08-15 14:20:00",
+    "creator": "456",
+    "updatedAt": "2021-09-02 17:45:00",
+    "description": "A project to create an online coding bootcamp for beginners"
+  },
+  {
+    "id": "3",
+    "image": "https://i.imgur.com/hodj9s3.jpg",
+    "title": "Sustainable Clothing Line",
+    "category": "Fashion",
+    "createdAt": "2021-05-28 09:00:00",
+    "creator": "789",
+    "updatedAt": "2021-06-10 10:15:00",
+    "description": "A project to start a clothing line using only sustainable materials"
+  },
+  {
+    "id": "4",
+    "image": "https://i.imgur.com/hodj9s3.jpg",
+    "title": "Photography Exhibit",
+    "category": "Arts",
+    "createdAt": "2021-10-01 13:00:00",
+    "creator": "456",
+    "updatedAt": "2021-10-15 12:30:00",
+    "description": "A project to curate and host a photography exhibit showcasing local artists"
+  },
+  {
+    "id": "5",
+    "image": "https://i.imgur.com/hodj9s3.jpg",
+    "title": "Home Automation System",
+    "category": "Technology",
+    "createdAt": "2021-03-20 16:45:00",
+    "creator": "123",
+    "updatedAt": "2021-04-05 11:00:00",
+    "description": "A project to develop a home automation system using Raspberry Pi"
+  }
+]

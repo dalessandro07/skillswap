@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import Register from './components/Register'
+import Register from '../components/auth/Register'
 
 const inter = Inter({ subsets: ['latin'] })
 

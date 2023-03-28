@@ -1,8 +1,11 @@
 import Link from 'next/link'
+import useRegister from '@/hooks/session/useRegister'
 
 export default function Register() {
+  const { handleRegister, loading } = useRegister()
+
   return (
-    <form method="POST" action="api/signup">
+    <form onSubmit={handleRegister}>
       <h1>Crea tu cuenta</h1>
 
       <div>
@@ -12,7 +15,7 @@ export default function Register() {
 
       <div>
         <label htmlFor="email">Correo institucional</label>
-        <input name="email" type="email" required placeholder="I202220654@cibertec.edu.pe" />
+        <input name="email" type="email" required placeholder="i202312345@cibertec.edu.pe" />
       </div>
 
       <div>
@@ -26,7 +29,9 @@ export default function Register() {
         />
       </div>
 
-      <button type="submit">Registrarme</button>
+      <button disabled={loading} type="submit">
+        {loading ? 'Registrando...' : 'Registrarme'}
+      </button>
       <Link style={{ color: '#f90' }} href="/login">
         Iniciar sesión
       </Link>

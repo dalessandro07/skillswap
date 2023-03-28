@@ -1,21 +1,13 @@
-import { useEffect } from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useUser } from '@supabase/auth-helpers-react'
-import UserPage from './components/UserPage'
+import UserPage from '../components/user/UserPage'
 import { Inter } from 'next/font/google'
+import useGetUser from '@/hooks/session/useGetUser'
+import ProjectsList from '@/components/projects/ProjectsList'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const user = useUser()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (!user) {
-      router.push('/login')
-    }
-  }, [user, router])
+  const { user, loading } = useGetUser()
 
   return (
     <>
@@ -30,9 +22,9 @@ export default function Home() {
       </Head>
 
       <main style={inter.style}>
-        <h1>SkillSwap</h1>
+        <section>{user && <UserPage user={user} loading={loading} />}</section>
 
-        {user && <UserPage user={user} />}
+        <ProjectsList />
       </main>
     </>
   )
