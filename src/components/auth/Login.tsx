@@ -23,9 +23,7 @@ export default function Login() {
   const { handleSubmit, handleLogin, isLoading, register, errors } = useLogin()
 
   return (
-    <form className="flex flex-col gap-5" onSubmit={handleSubmit(handleLogin)}>
-      <h1>Inicia sesión en SkillSwap</h1>
-
+    <form className="flex flex-col gap-5 py-10" onSubmit={handleSubmit(handleLogin)}>
       {LOGIN_FIELDS.map(({ name, type, placeholder, label }) => (
         <Input
           register={register}

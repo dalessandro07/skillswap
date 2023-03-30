@@ -35,9 +35,7 @@ export default function Register() {
   const { handleSubmit, handleRegister, isLoading, register, errors } = useRegister()
 
   return (
-    <form className="flex flex-col gap-5" onSubmit={handleSubmit(handleRegister)}>
-      <h1>Crea tu cuenta</h1>
-
+    <form className="flex flex-col gap-5 py-10" onSubmit={handleSubmit(handleRegister)}>
       <section className="flex flex-col gap-2 my-5">
         {REGISTER_FIELDS.map(({ name, type, placeholder, label }) => (
           <Input
