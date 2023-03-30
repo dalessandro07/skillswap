@@ -12,6 +12,7 @@ specifiers:
   eslint: 8.36.0
   eslint-config-next: 13.2.4
   next: 13.2.4
+  next-recaptcha-v3: ^1.1.5
   postcss: ^8.4.21
   react: 18.2.0
   react-dom: 18.2.0
@@ -32,6 +33,7 @@ dependencies:
   eslint: 8.36.0
   eslint-config-next: 13.2.4_j4766f7ecgqbon3u7zlxn5zszu
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
+  next-recaptcha-v3: 1.1.5_ld2jel3hspngo3u5lti2kgl2sq
   postcss: 8.4.21
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -2468,6 +2470,22 @@ packages:
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+    dev: false
+
+  /next-recaptcha-v3/1.1.5_ld2jel3hspngo3u5lti2kgl2sq:
+    resolution: {integrity: sha512-CkhhGf4bSmy7/rnqOW9Wv55iO2tvZoOHvniDhVhX9hlBUmLTpEnQgnkc85ct9PyoBse6elQHUhzjg/c4z0yJbw==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      next: '>=11.0.0'
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+    dependencies:
+      next: 13.2.4_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /next-tick/1.1.0:
