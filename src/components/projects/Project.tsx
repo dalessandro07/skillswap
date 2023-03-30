@@ -1,9 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { ProjectType } from '@/types'
+import ProjectReactions from './ProjectReactions'
+import useRouteTitle from '@/hooks/projects/useRouteTitle'
 
 export default function Project({ data }: { data: ProjectType }) {
-  const routeTitle = data.title.replace(/ /g, '-').toLocaleLowerCase()
+  const { routeTitle } = useRouteTitle({
+    title: data.title,
+    id: data.id
+  })
 
   return (
     <section className="flex flex-col gap-4">
@@ -47,12 +52,13 @@ export default function Project({ data }: { data: ProjectType }) {
           </p>
         </article>
 
-        <article className="flex items-center gap-4">
-          <p className="opacity-80 text-xs">
-            💬 {data.comments.length > 0 ? data.comments.length : 0}
-          </p>
-          <p className="opacity-80 text-xs">❤️ {data.likes}</p>
-        </article>
+        <ProjectReactions
+          projectTitle={data.title}
+          comments={data.comments}
+          likes={data.likes}
+          projectId={data.id}
+          asLink
+        />
       </article>
     </section>
   )

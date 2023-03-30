@@ -1,16 +1,30 @@
-import ProjectDetails from '@/components/projects/ProjectDetails'
-import { useFetchProjects } from '@/context/useProjectsStore'
+import ProjectDetails from '@/components/projects/details/ProjectDetails'
+import ProjectDetailsPlaceholder from '@/components/projects/loading/ProjectDetailsPlaceholder'
+import { useProjectsStore } from '@/context/useProjectsStore'
 import { useRouter } from 'next/router'
 
 export default function ProjectDetailsPage() {
   const router = useRouter()
 
   const { title } = router.query
-  const { loading } = useFetchProjects()
+  const { projects, loading } = useProjectsStore()
 
-  return loading.status ? (
-    <p className="text-center font-bold text-xl">Cargando...</p>
+  const project = projects.find(
+    ({ title: projectTitle, id }) =>
+      projectTitle.replace(/ /g, '-').toLocaleLowerCase().concat(`-${id}`) === title
+  )
+
+  const commentsLength = project?.comments?.length
+
+  if (!project) {
+    return <p>¡Proyecto no encontrado!</p>
+  }
+
+  const conditionToShowProject = loading.id === project.id && loading.status
+
+  return conditionToShowProject ? (
+    <ProjectDetailsPlaceholder commentsLength={commentsLength} />
   ) : (
-    <ProjectDetails routeTitle={title as string} />
+    <ProjectDetails project={project} />
   )
 }

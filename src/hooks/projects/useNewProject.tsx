@@ -39,7 +39,10 @@ export default function useNewProject() {
       return toast.error('Todos los campos son requeridos')
     }
 
-    const { error } = await supabaseClient.from('projects').insert(projectData)
+    const { error } = await supabaseClient.from('projects').insert({
+      ...projectData,
+      creator_id: user?.id
+    })
 
     if (error) return toast.error(error.message)
 

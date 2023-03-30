@@ -1,4 +1,4 @@
-export default function ProjectPlaceholderLoading() {
+export default function ProjectPlaceholder() {
   return (
     <div className="flex flex-col gap-6">
       <section className="flex flex-col gap-4">

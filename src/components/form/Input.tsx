@@ -4,13 +4,13 @@ export default function Input({ fields, children, register, errors }: InputProps
   const hasError = errors[fields.name]
 
   return (
-    <div className="flex flex-col gap-2">
-      <label htmlFor={fields.name}>{children}</label>
+    <div className="flex flex-col gap-2 w-full">
+      {children && <label htmlFor={fields.name}>{children}</label>}
 
       <div className="flex flex-col py-2">
         <input
           className={`
-          border-2 rounded-md p-2 text-black
+          border-b p-2 bg-transparent focus:outline-none
           ${hasError ? 'border-red-500 bg-rose-200' : 'border-gray-300'}
         `}
           {...register(fields.name, {

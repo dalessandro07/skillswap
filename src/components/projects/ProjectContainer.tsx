@@ -1,4 +1,4 @@
-import ProjectPlaceholderLoading from './ProjectPlaceholderLoading'
+import ProjectPlaceholder from './loading/ProjectPlaceholder'
 import type { ProjectType } from '@/types'
 import Project from './Project'
 
@@ -14,5 +14,5 @@ export default function ProjectContainer({
 }) {
   const conditionToShowProject = loading.id === data.id && loading.status
 
-  return conditionToShowProject ? <ProjectPlaceholderLoading /> : <Project data={data} />
+  return conditionToShowProject ? <ProjectPlaceholder /> : <Project data={data} />
 }

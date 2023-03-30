@@ -41,11 +41,18 @@ export interface ProjectType {
 export interface ProjectsStoreType {
   projects: ProjectType[]
   setProjects: (projects: ProjectType[]) => void
+  likedProjects: ProjectType[]
+  setLikedProjects: (projects: ProjectType[]) => void
+  loading: {
+    status: boolean
+    id: number
+  }
+  setLoading: ({ status, id }: { status: boolean; id: number }) => void
 }
 
 /* React Hook Form - Forms */
 
-export type FieldValuesType = UserDataType & ProjectType
+export type FieldValuesType = UserDataType & ProjectType & CommentType
 
 export interface InputPropsType {
   fields: {
@@ -53,7 +60,7 @@ export interface InputPropsType {
     type: string
     placeholder: string
   }
-  children: string | JSX.Element
+  children?: string | JSX.Element
   register: UseFormRegister
   errors: FieldErrors
 }
