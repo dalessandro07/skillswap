@@ -11,7 +11,7 @@ export default function useRegister() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isLoading }
+    formState: { errors, isSubmitting: isLoading }
   } = useForm<UserDataType>({
     mode: 'onChange',
     defaultValues: {

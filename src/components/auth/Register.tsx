@@ -2,6 +2,7 @@ import Link from 'next/link'
 import useRegister from '@/hooks/session/useRegister'
 import Input from '../form/Input'
 import type { InputFieldsType } from '@/types'
+import HeroButton from '../buttons/HeroButton'
 
 const REGISTER_FIELDS: InputFieldsType[] = [
   {
@@ -50,12 +51,13 @@ export default function Register() {
       </section>
 
       <div className="flex items-baseline gap-4">
-        <button
-          className="px-3.5 py-2 bg-orange-600 hover:bg-orange-700 transition-all duration-200 w-max rounded-sm"
-          disabled={isLoading}
-          type="submit">
+        <HeroButton
+          asFormButton={{
+            value: true,
+            isLoading
+          }}>
           {isLoading ? 'Registrando...' : 'Registrarme'}
-        </button>
+        </HeroButton>
 
         <Link className="border-b border-orange-600" href="/login">
           Iniciar sesión

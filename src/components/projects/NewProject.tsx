@@ -1,64 +1,39 @@
 import useNewProject from '@/hooks/projects/useNewProject'
-import { InputFieldsType } from '@/types'
-import Input from '../form/Input'
+import { useState } from 'react'
 
-const PROJECT_FIELDS: InputFieldsType[] = [
-  {
-    name: 'title',
-    type: 'text',
-    placeholder: 'SkillSwap',
-    label: 'Título'
-  },
-  {
-    name: 'description',
-    type: 'text',
-    placeholder: 'SkillSwap es ...',
-    label: 'Descripción'
-  },
-  {
-    name: 'image',
-    type: 'text',
-    placeholder: 'https://i.imgur.com/...',
-    label: 'Imagen (imgur)'
-  },
-  {
-    name: 'category',
-    type: 'text',
-    placeholder: 'Desarrollo web',
-    label: 'Categoría'
-  },
-  {
-    name: 'url',
-    type: 'text',
-    placeholder: 'https://skillswap.vercel.app',
-    label: 'Demo o Repositorio'
-  }
-]
+import FirstForm from './new_project/FirstForm'
+import SecondForm from './new_project/SecondForm'
+import Timeline from './new_project/Timeline'
 
 export default function NewProject() {
-  const { errors, handleAddProject, handleSubmit, isLoading, register } = useNewProject()
+  const { errors, handleAddProject, handleSubmit, isLoading, register, getDataFromWebsite } =
+    useNewProject()
+
+  const [viewSecondForm, setViewSecondForm] = useState(false)
+
+  const submitFn = viewSecondForm
+    ? handleSubmit(handleAddProject)
+    : handleSubmit((data) => {
+        getDataFromWebsite(data)
+        setViewSecondForm(true)
+      })
 
   return (
-    <form onSubmit={handleSubmit(handleAddProject)} action="">
-      <h1>Nuevo proyecto</h1>
+    <form className="flex flex-col grow justify-evenly gap-5 py-10" onSubmit={submitFn} action="">
+      <h1 className="text-lg font-bold flex gap-2 items-baseline">
+        Nuevo proyecto
+        <span className="text-gray-500 text-sm">
+          {viewSecondForm ? 'Paso 2 de 2' : 'Paso 1 de 2'}
+        </span>
+      </h1>
 
-      {PROJECT_FIELDS.map(({ name, type, placeholder, label }) => (
-        <Input
-          key={name}
-          register={register}
-          errors={errors}
-          fields={{
-            name,
-            type,
-            placeholder
-          }}>
-          {label}
-        </Input>
-      ))}
+      <Timeline viewSecondForm={viewSecondForm} setViewSecondForm={setViewSecondForm} />
 
-      <button disabled={isLoading} type="submit">
-        {isLoading ? 'Creando...' : 'Crear proyecto'}
-      </button>
+      {!viewSecondForm ? (
+        <FirstForm errors={errors} register={register} isLoading={isLoading} />
+      ) : (
+        <SecondForm errors={errors} register={register} isLoading={isLoading} />
+      )}
     </form>
   )
 }

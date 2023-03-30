@@ -2,6 +2,7 @@ import Link from 'next/link'
 import useLogin from '@/hooks/session/useLogin'
 import Input from '../form/Input'
 import type { InputFieldsType } from '@/types'
+import HeroButton from '../buttons/HeroButton'
 
 const LOGIN_FIELDS: InputFieldsType[] = [
   {
@@ -40,12 +41,13 @@ export default function Login() {
       ))}
 
       <div className="flex items-baseline gap-4">
-        <button
-          className="px-3.5 py-2 bg-orange-600 hover:bg-orange-700 transition-all duration-200 w-max rounded-sm"
-          disabled={isLoading}
-          type="submit">
+        <HeroButton
+          asFormButton={{
+            value: true,
+            isLoading
+          }}>
           {isLoading ? 'Ingresando...' : 'Iniciar sesión'}
-        </button>
+        </HeroButton>
 
         <Link className="border-b border-orange-600" href="/register">
           Registrarme

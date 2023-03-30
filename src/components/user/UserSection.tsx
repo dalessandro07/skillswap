@@ -1,10 +1,10 @@
 import SignOut from '../auth/SignOut'
 import type { User } from '@supabase/supabase-js'
-import Link from 'next/link'
+import HeroButton from '../buttons/HeroButton'
 
 export default function UserPage({ user }: { user: User }) {
   return (
-    <section>
+    <section className="flex flex-col grow justify-center items-center gap-5">
       <article className="flex items-center gap-1">
         <h1>Bienvenido, {user.user_metadata.username}</h1>
         <svg
@@ -25,8 +25,15 @@ export default function UserPage({ user }: { user: User }) {
       <p>Nombre: {user.user_metadata.fullName}</p>
       <p>Correo: {user.email}</p>
 
-      <article className="flex gap-4">
-        <Link href="/projects/new_project">Crear un proyecto</Link>
+      <article className="flex flex-col gap-4">
+        <HeroButton
+          asLink={{
+            href: '/projects/new_project',
+            value: true
+          }}>
+          Crear un proyecto
+        </HeroButton>
+
         <SignOut />
       </article>
     </section>

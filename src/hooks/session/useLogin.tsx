@@ -11,7 +11,7 @@ export default function useLogin() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isLoading }
+    formState: { errors, isSubmitting: isLoading }
   } = useForm<Partial<UserDataType>>({
     mode: 'onChange',
     defaultValues: {

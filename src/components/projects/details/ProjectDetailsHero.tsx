@@ -7,7 +7,7 @@ export default function ProjectDetailsHero({ project }: { project: ProjectType }
 
   return (
     <article className="flex flex-col gap-2 w-full py-6">
-      <div className="flex gap-2">
+      <div className="flex gap-2 px-2">
         <p className="hidden lg:flex gap-2">
           Un proyecto de <strong>{project.creator.fullName}</strong> ·
         </p>
@@ -17,7 +17,7 @@ export default function ProjectDetailsHero({ project }: { project: ProjectType }
 
       <section className="relative">
         <Image
-          className="w-full min-h-[55vh] object-cover rounded-sm"
+          className="w-full min-h-[55vh] max-h-screen object-cover rounded-sm object-left-top"
           priority
           quality={75}
           src={project.image}

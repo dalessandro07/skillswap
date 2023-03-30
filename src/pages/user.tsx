@@ -4,7 +4,7 @@ import Head from 'next/head'
 import UserSection from '../components/user/UserSection'
 
 export default function UserPage() {
-  const { user, loading } = useGetUser()
+  const { user } = useGetUser()
 
   return (
     <>
@@ -16,11 +16,8 @@ export default function UserPage() {
         />
       </Head>
 
-      <section>
-        {!user && !loading && <UserError />}
-        {loading && <p>Cargando...</p>}
-        {user && <UserSection user={user} />}
-      </section>
+      {!user && <UserError />}
+      {user && <UserSection user={user} />}
     </>
   )
 }
