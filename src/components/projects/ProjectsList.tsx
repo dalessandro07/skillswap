@@ -6,7 +6,7 @@ export default function ProjectsList() {
   const { projects, loading } = useProjectsStore()
 
   return (
-    <section className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
+    <section className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 py-10">
       {loading.status && projects.length === 0 && (
         <p className="text-xl font-bold py-6 animate-pulse">Cargando proyectos...</p>
       )}

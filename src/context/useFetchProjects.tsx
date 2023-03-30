@@ -14,8 +14,6 @@ export const useFetchProjects = (supabaseClient: SupabaseClient) => {
 
   const fetchProjects = useCallback(
     async ({ id = 0 }: { id?: number }) => {
-      console.log('fetching projects')
-
       setLoading({ id, status: true })
       const { data: projects, error } = await supabaseClient
         .from('projects')

@@ -22,7 +22,7 @@ export default function Login() {
   const { handleSubmit, handleLogin, isLoading, register, errors } = useLogin()
 
   return (
-    <form onSubmit={handleSubmit(handleLogin)}>
+    <form className="flex flex-col gap-5" onSubmit={handleSubmit(handleLogin)}>
       <h1>Inicia sesión en SkillSwap</h1>
 
       {LOGIN_FIELDS.map(({ name, type, placeholder, label }) => (
@@ -39,12 +39,18 @@ export default function Login() {
         </Input>
       ))}
 
-      <button disabled={isLoading} type="submit">
-        {isLoading ? 'Ingresando...' : 'Iniciar sesión'}
-      </button>
-      <Link style={{ color: '#f90' }} href="/register">
-        Registrarme
-      </Link>
+      <div className="flex items-baseline gap-4">
+        <button
+          className="px-3.5 py-2 bg-orange-600 hover:bg-orange-700 transition-all duration-200 w-max rounded-sm"
+          disabled={isLoading}
+          type="submit">
+          {isLoading ? 'Ingresando...' : 'Iniciar sesión'}
+        </button>
+
+        <Link className="border-b border-orange-600" href="/register">
+          Registrarme
+        </Link>
+      </div>
     </form>
   )
 }

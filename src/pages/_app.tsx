@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast'
 import RootLayout from './layout'
 import { useFetchProjects } from '@/context/useFetchProjects'
 import { useProjectsStore } from '@/context/useProjectsStore'
+import { ReCaptchaProvider } from 'next-recaptcha-v3'
 
 export default function App({
   Component,
@@ -23,14 +24,16 @@ export default function App({
   }, [loading, setLoading])
 
   return (
-    <SessionContextProvider
-      supabaseClient={supabaseClient}
-      initialSession={pageProps.initialSession}>
-      <RootLayout>
-        <Component {...pageProps} />
-      </RootLayout>
-      <Toaster />
-    </SessionContextProvider>
+    <ReCaptchaProvider>
+      <SessionContextProvider
+        supabaseClient={supabaseClient}
+        initialSession={pageProps.initialSession}>
+        <RootLayout>
+          <Component {...pageProps} />
+        </RootLayout>
+        <Toaster />
+      </SessionContextProvider>
+    </ReCaptchaProvider>
   )
 }
 

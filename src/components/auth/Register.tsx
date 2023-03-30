@@ -34,7 +34,7 @@ export default function Register() {
   const { handleSubmit, handleRegister, isLoading, register, errors } = useRegister()
 
   return (
-    <form onSubmit={handleSubmit(handleRegister)}>
+    <form className="flex flex-col gap-5" onSubmit={handleSubmit(handleRegister)}>
       <h1>Crea tu cuenta</h1>
 
       <section className="flex flex-col gap-2 my-5">
@@ -49,13 +49,18 @@ export default function Register() {
         ))}
       </section>
 
-      <button disabled={isLoading} type="submit">
-        {isLoading ? 'Registrando...' : 'Registrarme'}
-      </button>
+      <div className="flex items-baseline gap-4">
+        <button
+          className="px-3.5 py-2 bg-orange-600 hover:bg-orange-700 transition-all duration-200 w-max rounded-sm"
+          disabled={isLoading}
+          type="submit">
+          {isLoading ? 'Registrando...' : 'Registrarme'}
+        </button>
 
-      <Link style={{ color: '#f90' }} href="/login">
-        Iniciar sesión
-      </Link>
+        <Link className="border-b border-orange-600" href="/login">
+          Iniciar sesión
+        </Link>
+      </div>
     </form>
   )
 }

@@ -12,7 +12,7 @@ export default function ProjectsPage() {
         />
       </Head>
 
-      <section>
+      <section className="flex flex-col justify-center grow">
         <h1 className="text-center text-4xl font-bold">Proyectos</h1>
 
         <ProjectsList />
