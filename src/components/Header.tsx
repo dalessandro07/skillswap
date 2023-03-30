@@ -2,7 +2,7 @@ import useGetUser from '@/hooks/session/useGetUser'
 import Link from 'next/link'
 
 export default function Header() {
-  const { user, loading } = useGetUser()
+  const { user } = useGetUser()
 
   return (
     <header className="flex items-center justify-between w-full py-5">
