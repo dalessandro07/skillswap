@@ -20,8 +20,8 @@ export interface CommentType {
 }
 
 export interface ProjectType {
-  id: bigint | number | null
-  createdAt: string | null
+  id: number
+  createdAt: string
   updatedAt: string
   title: string
   description: string

@@ -9,6 +9,9 @@ module.exports = {
       screens: {
         xs: '475px',
         ...defaultTheme.screens
+      },
+      colors: {
+        'custom-black': '#18181b'
       }
     }
   },

@@ -1,13 +1,13 @@
 import Image from 'next/image'
-import type { ProjectType } from '@/types'
 import Link from 'next/link'
+import type { ProjectType } from '@/types'
 
 export default function Project({ data }: { data: ProjectType }) {
   const routeTitle = data.title.replace(/ /g, '-').toLocaleLowerCase()
 
   return (
-    <article className="flex flex-col gap-4">
-      <section className="flex flex-col gap-2">
+    <section className="flex flex-col gap-4">
+      <article className="flex flex-col grow gap-2">
         <div className="flex items-center gap-1">
           <p className="font-bold min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
             {data.creator.fullName}
@@ -21,10 +21,11 @@ export default function Project({ data }: { data: ProjectType }) {
           </p>
         </div>
 
-        <Link href={`/projects/project/${routeTitle}`}>
+        <Link className="h-full" href={`/projects/project/${routeTitle}`}>
           <Image
-            className="w-full"
+            className="w-full h-full object-cover rounded-sm"
             priority
+            quality={75}
             src={data.image}
             alt={data.title}
             width={200}
@@ -32,14 +33,18 @@ export default function Project({ data }: { data: ProjectType }) {
           />
           <span className="sr-only">Ver proyecto</span>
         </Link>
-      </section>
+      </article>
 
-      <section className="flex flex-col gap-2">
+      <article className="flex flex-col gap-2">
         <article className="flex flex-col">
           <Link href={`/projects/project/${routeTitle}`}>
-            <h1 className="font-bold">{data.title}</h1>
+            <h1 className="font-bold min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
+              {data.title}
+            </h1>
           </Link>
-          <p className="opacity-80 text-sm">{data.category}</p>
+          <p className="opacity-80 text-sm min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
+            {data.category}
+          </p>
         </article>
 
         <article className="flex items-center gap-4">
@@ -48,7 +53,7 @@ export default function Project({ data }: { data: ProjectType }) {
           </p>
           <p className="opacity-80 text-xs">❤️ {data.likes}</p>
         </article>
-      </section>
-    </article>
+      </article>
+    </section>
   )
 }
