@@ -15,9 +15,6 @@ function Project({ project }: { project: ProjectType }) {
     <section className="flex flex-col gap-4">
       <article className="flex flex-col grow gap-2">
         <div className="flex items-center gap-1">
-          <p className="font-bold min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
-            {project.creator.fullName}
-          </p>
           <p className="text-xs opacity-80 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
             @{project.creator.username}
           </p>

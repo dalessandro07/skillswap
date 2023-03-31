@@ -12,3 +12,8 @@ body {
 .grecaptcha-badge {
   visibility: hidden;
 }
+
+::selection {
+  background-color: #ea580c;
+  color: #fafafa;
+}

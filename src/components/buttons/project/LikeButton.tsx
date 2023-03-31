@@ -1,7 +1,24 @@
+import { useProjectsStore } from '@/context/useProjectsStore'
 import useLikes from '@/hooks/projects/useLikes'
+import useGetUser from '@/hooks/session/useGetUser'
+import { useEffect } from 'react'
 
 export default function LikeButton({ likes, projectId }: { likes: number; projectId: number }) {
-  const { isLiked, handleLike } = useLikes(projectId)
+  const { user } = useGetUser()
+  const { handleLike } = useLikes(projectId)
+  const { projects, setLikedProjects } = useProjectsStore()
+
+  useEffect(() => {
+    const likedProjects = projects.filter((project) => {
+      return project.likes.some((like) => like.creator_id === user?.id)
+    })
+
+    setLikedProjects(likedProjects)
+  }, [projects, setLikedProjects, user])
+
+  const isLiked = projects.some((project) => {
+    return project.id === projectId && project.likes.some((like) => like.creator_id === user?.id)
+  })
 
   return (
     <div className="flex group items-center gap-1 opacity-80">
