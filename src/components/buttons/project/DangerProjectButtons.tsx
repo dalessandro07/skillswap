@@ -1,10 +1,20 @@
-import useDeleteProject from '@/hooks/projects/useDeleteProject'
 import { useState } from 'react'
+import DeleteProjectButton from './DeleteProjectButton'
+import useDeleteProject from '@/hooks/projects/useDeleteProject'
+import EditProjectButton from './EditProjectButton'
 
 export default function DangerProjectButtons({ title, id }: { title: string; id: number }) {
   const { handleDeleteProject } = useDeleteProject()
   const [viewConfirmation, setViewConfirmation] = useState(false)
   const [titleConfirmation, setTitleConfirmation] = useState('')
+
+  function handleConfirmDelete() {
+    if (viewConfirmation) {
+      handleDeleteProject(id)
+    } else {
+      setViewConfirmation(true)
+    }
+  }
 
   function handleChangeTitleConfirmation(e: React.ChangeEvent<HTMLInputElement>) {
     setTitleConfirmation(e.target.value)
@@ -22,22 +32,16 @@ export default function DangerProjectButtons({ title, id }: { title: string; id:
         />
       )}
 
-      <button
-        disabled={viewConfirmation && titleConfirmation !== title}
-        onClick={() => {
-          if (viewConfirmation) {
-            handleDeleteProject(id)
-          } else {
-            setViewConfirmation(true)
-          }
-        }}
-        className={`${
-          viewConfirmation && titleConfirmation !== title
-            ? 'bg-gray-500 cursor-not-allowed'
-            : 'bg-red-600 hover:bg-red-700'
-        } text-sm py-1 px-2 rounded-sm  transition-all duration-150`}>
-        Eliminar proyecto
-      </button>
+      <div className="flex gap-4 items-center">
+        <EditProjectButton projectId={id} />
+
+        <DeleteProjectButton
+          title={title}
+          handleClick={handleConfirmDelete}
+          viewConfirmation={viewConfirmation}
+          titleConfirmation={titleConfirmation}
+        />
+      </div>
     </section>
   )
 }

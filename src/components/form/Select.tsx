@@ -1,6 +1,6 @@
-import type { InputPropsType } from '@/types'
+import type { SelectPropsType } from '@/types'
 
-export default function Input({ fields, children, register, errors }: InputPropsType) {
+export default function Select({ fields, children, register, errors }: SelectPropsType) {
   const hasError = errors[fields.name]
 
   return (
@@ -8,7 +8,7 @@ export default function Input({ fields, children, register, errors }: InputProps
       {children && <label htmlFor={fields.name}>{children}</label>}
 
       <div className="flex flex-col py-2">
-        <input
+        <select
           className={`
           border-b p-2 focus:outline-none
           ${hasError ? 'border-red-500' : 'border-gray-300'}
@@ -18,10 +18,14 @@ export default function Input({ fields, children, register, errors }: InputProps
               value: true,
               message: 'Este campo es requerido'
             }
-          })}
-          type={fields.type}
-          placeholder={fields.placeholder}
-        />
+          })}>
+          {fields.options.map((option, i) => (
+            <option key={i} disabled={option.disabled} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+
         {hasError && (
           <span className="text-red-500 text-sm">{errors[fields.name]?.message as string}</span>
         )}

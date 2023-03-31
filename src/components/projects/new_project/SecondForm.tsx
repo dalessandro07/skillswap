@@ -1,5 +1,6 @@
 import HeroButton from '@/components/buttons/HeroButton'
 import Input from '@/components/form/Input'
+import Select from '@/components/form/Select'
 import type { ProjectType, InputFieldsType } from '@/types'
 import type { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 
@@ -23,12 +24,6 @@ const PROJECT_FIELDS: InputFieldsType[] = [
     label: 'Imagen (imgur)'
   },
   {
-    name: 'category',
-    type: 'text',
-    placeholder: 'Desarrollo web',
-    label: 'Categoría'
-  },
-  {
     name: 'url',
     type: 'text',
     placeholder: 'https://skillswap.vercel.app',
@@ -39,12 +34,17 @@ const PROJECT_FIELDS: InputFieldsType[] = [
 export default function SecondForm({
   register,
   errors,
-  isLoading
+  isLoading,
+  type = 'new'
 }: {
   register: UseFormRegister<ProjectType>
   errors: FieldErrors<FieldValues>
   isLoading: boolean
+  type?: 'new' | 'edit'
 }) {
+  const isEdit = type === 'edit'
+  const message = isEdit ? 'Guardar cambios' : 'Crear proyecto'
+
   return (
     <>
       {PROJECT_FIELDS.map(({ name, type, placeholder, label }) => (
@@ -61,12 +61,32 @@ export default function SecondForm({
         </Input>
       ))}
 
+      <Select
+        register={register}
+        errors={errors}
+        fields={{
+          name: 'category',
+          options: [
+            { value: '', label: 'Selecciona una categoría', disabled: true },
+            { value: 'frontend', label: 'Frontend' },
+            { value: 'backend', label: 'Backend' },
+            { value: 'fullstack', label: 'Fullstack' },
+            { value: 'mobile', label: 'Mobile' },
+            { value: 'devops', label: 'DevOps' },
+            { value: 'ux/ui', label: 'UX/UI' },
+            { value: 'game', label: 'Game Development' },
+            { value: 'other', label: 'Otro' }
+          ]
+        }}>
+        Categoría
+      </Select>
+
       <HeroButton
         asFormButton={{
           value: true,
           isLoading
         }}>
-        {isLoading ? 'Creando...' : 'Crear proyecto'}
+        {isLoading ? 'Cargando...' : message}
       </HeroButton>
     </>
   )

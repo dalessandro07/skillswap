@@ -1,32 +1,52 @@
 import { useProjectsStore } from '@/context/useProjectsStore'
-import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react'
+import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { toast } from 'react-hot-toast'
-import type { ProjectType } from '@/types'
 import { useState } from 'react'
+import useGetUser from '../session/useGetUser'
 
-export default function useLikes(id: number) {
+export default function useLikes(projectId: number) {
   const supabaseClient = useSupabaseClient()
-  const user = useUser()
+  const { user } = useGetUser()
   const { projects, likedProjects, setLikedProjects } = useProjectsStore()
 
-  const projectIsLiked = likedProjects.some((project) => project.id === id)
-  const [isLiked, setIsLiked] = useState<boolean>(projectIsLiked)
+  const projectToLike = projects.find((project) => project.id === projectId)
+
+  const [isLiked, setIsLiked] = useState<boolean>(
+    likedProjects.some((project) => project.id === projectId)
+  )
 
   async function toggleLike({
-    id,
-    likeOrUnlike,
-    projectToLike
+    projectId,
+    likeOrUnlike
   }: {
-    id: number
+    projectId: number
     likeOrUnlike: 'like' | 'unlike'
-    projectToLike: ProjectType
   }) {
+    if (!projectToLike) return
+    if (!user) return toast.error('Inicia sesión para reaccionar.')
+
+    const updatedLikes = [...projectToLike.likes]
+
+    if (likeOrUnlike === 'like') {
+      updatedLikes.push({
+        id: `${projectId}-${user.id}`,
+        creator_id: user.id,
+        createdAt: new Date().toISOString()
+      })
+    } else {
+      const likeIndex = updatedLikes.findIndex((like) => like.id === `${projectId}-${user?.id}`)
+
+      if (likeIndex !== -1) {
+        updatedLikes.splice(likeIndex, 1)
+      }
+    }
+
     const { error } = await supabaseClient
       .from('projects')
       .update({
-        likes: likeOrUnlike === 'like' ? projectToLike?.likes + 1 : projectToLike?.likes - 1
+        likes: updatedLikes
       })
-      .eq('id', id)
+      .eq('id', projectId)
 
     if (error) {
       return toast.error(error.message)
@@ -34,21 +54,18 @@ export default function useLikes(id: number) {
   }
 
   async function handleLike() {
-    const projectToLike = projects.find((project) => project.id === id)
+    if (!projectToLike) return toast.error('No se encontró el proyecto.')
+    if (!user) return toast.error('Inicia sesión para reaccionar.')
 
-    if (!projectToLike) return
-
-    if (!user) {
-      return toast.error('Inicia sesión para reaccionar.')
-    }
+    const projectIsLiked = projectToLike.likes.some((like) => like.creator_id === user.id)
 
     if (projectIsLiked) {
-      setLikedProjects(likedProjects.filter((project) => project.id !== id))
+      setLikedProjects(likedProjects.filter((project) => project.id !== projectId))
       setIsLiked(false)
-      return toggleLike({ id, likeOrUnlike: 'unlike', projectToLike })
+      return toggleLike({ projectId, likeOrUnlike: 'unlike' })
     }
 
-    toggleLike({ id, likeOrUnlike: 'like', projectToLike })
+    toggleLike({ projectId, likeOrUnlike: 'like' })
     setLikedProjects([...likedProjects, projectToLike])
     setIsLiked(true)
   }

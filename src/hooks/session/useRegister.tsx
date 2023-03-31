@@ -45,12 +45,6 @@ export default function useRegister() {
         return toast.error(error.message)
       }
 
-      if (data.user?.aud === 'authenticated') {
-        toast.error('¡Ya existe una cuenta con estos datos, inicia sesión!')
-        router.push('/login')
-        return
-      }
-
       if (data.user) {
         toast.success(`¡Confirma tu cuenta, te enviamos un correo a ${data.user.email}!`, {
           duration: 3500

@@ -1,6 +1,6 @@
 import { CommentType } from '@/types'
-import CommentButton from '../buttons/CommentButton'
-import LikeButton from '../buttons/LikeButton'
+import CommentButton from '../buttons/project/CommentButton'
+import LikeButton from '../buttons/project/LikeButton'
 
 export default function ProjectReactions({
   comments,

@@ -16,7 +16,7 @@ export default function ProjectsList() {
       )}
 
       {projects.map((project: ProjectType) => (
-        <ProjectContainer key={project.id} data={project} loading={loading} />
+        <ProjectContainer key={project.id} project={project} loading={loading} />
       ))}
     </section>
   )

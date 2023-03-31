@@ -5,7 +5,12 @@ export default function ProjectDetailsPlaceholder({
 }: {
   commentsLength?: number
 }) {
-  const newArrayOfComments = Array.from({ length: commentsLength as number }, (_, i) => i)
+  const conditionToShowComments = commentsLength < 10
+
+  const newArrayOfComments = Array.from(
+    { length: conditionToShowComments ? commentsLength : 10 },
+    (_, i) => i
+  )
 
   return (
     <div className="flex flex-col gap-6 w-2/3 mx-auto py-12">

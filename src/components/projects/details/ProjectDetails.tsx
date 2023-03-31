@@ -1,10 +1,11 @@
 import useGetUser from '@/hooks/session/useGetUser'
-import DangerProjectButtons from '../../buttons/DangerProjectButtons'
+import DangerProjectButtons from '../../buttons/project/DangerProjectButtons'
 import ProjectDetailsInfo from './ProjectDetailsInfo'
 import ProjectDetailsHero from './ProjectDetailsHero'
 import { ProjectType } from '@/types'
+import { memo } from 'react'
 
-export default function ProjectDetails({ project }: { project: ProjectType }) {
+function ProjectDetails({ project }: { project: ProjectType }) {
   const { user } = useGetUser()
 
   const { creator } = project
@@ -20,3 +21,5 @@ export default function ProjectDetails({ project }: { project: ProjectType }) {
     </section>
   )
 }
+
+export default memo(ProjectDetails)

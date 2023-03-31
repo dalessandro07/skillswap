@@ -3,16 +3,16 @@ import type { ProjectType } from '@/types'
 import Project from './Project'
 
 export default function ProjectContainer({
-  data,
+  project,
   loading
 }: {
-  data: ProjectType
+  project: ProjectType
   loading: {
     id: number
     status: boolean
   }
 }) {
-  const conditionToShowProject = loading.id === data.id && loading.status
+  const conditionToShowProject = loading.id === project.id && loading.status
 
-  return conditionToShowProject ? <ProjectPlaceholder /> : <Project data={data} />
+  return conditionToShowProject ? <ProjectPlaceholder /> : <Project project={project} />
 }

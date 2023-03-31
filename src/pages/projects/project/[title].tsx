@@ -9,22 +9,26 @@ export default function ProjectDetailsPage() {
   const { title } = router.query
   const { projects, loading } = useProjectsStore()
 
-  const project = projects.find(
-    ({ title: projectTitle, id }) =>
-      projectTitle.replace(/ /g, '-').toLocaleLowerCase().concat(`-${id}`) === title
-  )
+  const slug = (title: string, id: number) =>
+    title.replace(/ /g, '-').toLocaleLowerCase().concat(`-${id}`)
 
-  const commentsLength = project?.comments?.length
+  const project = projects.find(({ title: projectTitle, id }) => slug(projectTitle, id) === title)
 
-  if (!project) {
+  if (!project && !loading.status) {
     return <p>¡Proyecto no encontrado!</p>
   }
 
-  const conditionToShowProject = loading.id === project.id && loading.status
+  if (!project && loading.status) {
+    return <ProjectDetailsPlaceholder />
+  }
+
+  const commentsLength = project && project.comments.length
+
+  const conditionToShowProject = project && loading.id === project.id && loading.status
 
   return conditionToShowProject ? (
     <ProjectDetailsPlaceholder commentsLength={commentsLength} />
   ) : (
-    <ProjectDetails project={project} />
+    project && <ProjectDetails project={project} />
   )
 }

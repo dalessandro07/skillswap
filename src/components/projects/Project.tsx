@@ -3,11 +3,12 @@ import Link from 'next/link'
 import type { ProjectType } from '@/types'
 import ProjectReactions from './ProjectReactions'
 import useRouteTitle from '@/hooks/projects/useRouteTitle'
+import { memo } from 'react'
 
-export default function Project({ data }: { data: ProjectType }) {
+function Project({ project }: { project: ProjectType }) {
   const { routeTitle } = useRouteTitle({
-    title: data.title,
-    id: data.id
+    title: project.title,
+    id: project.id
   })
 
   return (
@@ -15,14 +16,14 @@ export default function Project({ data }: { data: ProjectType }) {
       <article className="flex flex-col grow gap-2">
         <div className="flex items-center gap-1">
           <p className="font-bold min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
-            {data.creator.fullName}
+            {project.creator.fullName}
           </p>
           <p className="text-xs opacity-80 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
-            @{data.creator.username}
+            @{project.creator.username}
           </p>
           <p className="opacity-80">·</p>
           <p className="text-xs opacity-80 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
-            {new Date(data.createdAt).toLocaleDateString('es-ES')}
+            {new Date(project.createdAt).toLocaleDateString('es-ES')}
           </p>
         </div>
 
@@ -31,8 +32,8 @@ export default function Project({ data }: { data: ProjectType }) {
             className="w-full h-full object-cover rounded-sm"
             priority
             quality={75}
-            src={data.image}
-            alt={data.title}
+            src={project.image}
+            alt={project.title}
             width={200}
             height={200}
           />
@@ -44,22 +45,24 @@ export default function Project({ data }: { data: ProjectType }) {
         <article className="flex flex-col">
           <Link href={`/projects/project/${routeTitle}`}>
             <h1 className="font-bold min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
-              {data.title}
+              {project.title}
             </h1>
           </Link>
-          <p className="opacity-80 text-sm min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
-            {data.category}
+          <p className="opacity-80 text-sm min-w-0 whitespace-nowrap overflow-hidden text-ellipsis capitalize">
+            {project.category}
           </p>
         </article>
 
         <ProjectReactions
-          projectTitle={data.title}
-          comments={data.comments}
-          likes={data.likes}
-          projectId={data.id}
+          projectTitle={project.title}
+          comments={project.comments}
+          likes={project.likes.length}
+          projectId={project.id}
           asLink
         />
       </article>
     </section>
   )
 }
+
+export default memo(Project)

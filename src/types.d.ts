@@ -10,6 +10,12 @@ export interface UserDataType {
 
 /* Projects */
 
+export interface LikeType {
+  id: string
+  creator_id: string
+  createdAt: string
+}
+
 export interface CommentType {
   id: string
   author: string
@@ -32,8 +38,9 @@ export interface ProjectType {
     fullName: string
   }
   url: string
-  likes: number
+  likes: LikeType[]
   comments: CommentType[]
+  creator_id: string
 }
 
 /* Zustand - Projects Store */
@@ -59,6 +66,19 @@ export interface InputPropsType {
     name: keyof FieldValuesType
     type: string
     placeholder: string
+  }
+  children?: string | JSX.Element
+  register: UseFormRegister
+  errors: FieldErrors
+}
+
+export interface SelectPropsType {
+  fields: {
+    name: keyof FieldValuesType
+    options: React.DetailedHTMLProps<
+      React.OptionHTMLAttributes<HTMLOptionElement>,
+      HTMLOptionElement
+    >[]
   }
   children?: string | JSX.Element
   register: UseFormRegister

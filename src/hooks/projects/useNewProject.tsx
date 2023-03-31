@@ -4,11 +4,29 @@ import { useRouter } from 'next/router'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { toast } from 'react-hot-toast'
 import useGetUser from '../session/useGetUser'
+import useValidateUniqueProject from './useValidateUniqueProject'
+import useGetDataFromWebsite from './useGetDataFromWebsite'
 
-export default function useNewProject() {
+export default function useNewProject(
+  defaultValues: Partial<ProjectType> = {
+    creator: {
+      username: '',
+      fullName: ''
+    },
+    updatedAt: `${new Date().toISOString().split('.')[0]}`,
+    title: '',
+    description: '',
+    image: '',
+    category: 'frontend',
+    url: '',
+    likes: [],
+    comments: []
+  },
+  type: 'new' | 'edit' = 'new'
+) {
   const supabaseClient = useSupabaseClient()
-  const { user } = useGetUser()
   const router = useRouter()
+  const { user } = useGetUser()
 
   const {
     register,
@@ -17,78 +35,47 @@ export default function useNewProject() {
     setValue
   } = useForm<ProjectType>({
     mode: 'onChange',
-    defaultValues: {
-      creator: {
-        username: user?.user_metadata.username || '',
-        fullName: user?.user_metadata.fullName || ''
-      },
-      updatedAt: `${new Date().toISOString().split('.')[0]}`,
-      title: '',
-      description: '',
-      image: '',
-      category: '',
-      url: '',
-      likes: 0,
-      comments: []
-    }
+    defaultValues
   })
 
-  async function getDataFromWebsite(projectData: Partial<ProjectType>) {
-    const { url } = projectData
-
-    const getData = async () => {
-      const res = await fetch('/api/get_project', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ url })
-      })
-
-      const data = await res.json()
-
-      if (res.status !== 200) {
-        throw new Error(data.message)
-      }
-
-      return data
-    }
-
-    toast.promise(
-      getData(),
-      {
-        loading: 'Obteniendo datos...',
-        success: (data) => {
-          setValue('title', data.title)
-          setValue('description', data.description)
-
-          return `¡Datos del proyecto obtenidos con éxito!`
-        },
-        error: (error) => `Error al obtener los datos del proyecto: \n ${error}`
-      },
-      {
-        success: {
-          duration: 5000
-        }
-      }
-    )
-  }
+  const { validateUniqueProject } = useValidateUniqueProject()
+  const { getDataFromWebsite } = useGetDataFromWebsite(setValue)
 
   async function handleAddProject(projectData: Partial<ProjectType>) {
-    const { title, description, image, category } = projectData
+    const { title, description, image, category, url } = projectData
 
     if (!title || !description || !image || !category) {
       return toast.error('Todos los campos son requeridos')
     }
 
-    const { error } = await supabaseClient.from('projects').insert({
-      ...projectData,
-      creator_id: user?.id
-    })
+    if (type === 'new') {
+      const errorMessage = await validateUniqueProject(projectData)
 
-    if (error) return toast.error(error.message)
+      if (errorMessage) {
+        return toast.error(errorMessage)
+      }
 
-    toast.success(`¡Proyecto ${title} creado con éxito!`)
+      const { error } = await supabaseClient.from('projects').insert({
+        ...projectData,
+        creator_id: user?.id
+      })
+
+      if (error) return toast.error(error.message)
+
+      toast.success(`¡Proyecto ${title} creado con éxito!`)
+    } else {
+      const { error } = await supabaseClient
+        .from('projects')
+        .update({
+          ...projectData,
+          creator_id: user?.id
+        })
+        .eq('id', projectData.id)
+
+      if (error) return toast.error(error.message)
+
+      toast.success(`¡Proyecto ${title} editado con éxito!`)
+    }
 
     router.push('/projects')
   }

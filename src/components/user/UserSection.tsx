@@ -1,10 +1,23 @@
 import SignOut from '../auth/SignOut'
 import type { User } from '@supabase/supabase-js'
 import HeroButton from '../buttons/HeroButton'
+import UserLikedProjects from './UserLikedProjects'
+import { useEffect } from 'react'
+import { useProjectsStore } from '@/context/useProjectsStore'
 
 export default function UserPage({ user }: { user: User }) {
+  const { projects, likedProjects, setLikedProjects } = useProjectsStore()
+
+  useEffect(() => {
+    const likedProjects = projects.filter((project) => {
+      return project.likes.some((like) => like.creator_id === user.id)
+    })
+
+    setLikedProjects(likedProjects)
+  }, [projects, setLikedProjects, user.id])
+
   return (
-    <section className="flex flex-col grow justify-center items-center gap-5">
+    <section className="flex flex-col grow justify-center items-center gap-10">
       <article className="flex items-center gap-1">
         <h1>Bienvenido, {user.user_metadata.username}</h1>
         <svg
@@ -22,10 +35,14 @@ export default function UserPage({ user }: { user: User }) {
         </svg>
       </article>
 
-      <p>Nombre: {user.user_metadata.fullName}</p>
-      <p>Correo: {user.email}</p>
+      <article className="flex items-center flex-col">
+        <p>Nombre: {user.user_metadata.fullName}</p>
+        <p>Correo: {user.email}</p>
+      </article>
 
-      <article className="flex flex-col gap-4">
+      {likedProjects.length > 0 && <UserLikedProjects />}
+
+      <article className="flex gap-4">
         <HeroButton
           asLink={{
             href: '/projects/new_project',
