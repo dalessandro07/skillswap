@@ -35,7 +35,13 @@ export default function useNewProject(
     setValue
   } = useForm<ProjectType>({
     mode: 'onChange',
-    defaultValues
+    defaultValues: {
+      ...defaultValues,
+      creator: {
+        username: user?.user_metadata.username || '',
+        fullName: user?.user_metadata.fullName || ''
+      }
+    }
   })
 
   const { validateUniqueProject } = useValidateUniqueProject()
