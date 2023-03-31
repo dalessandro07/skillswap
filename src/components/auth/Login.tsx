@@ -8,8 +8,8 @@ const LOGIN_FIELDS: InputFieldsType[] = [
   {
     name: 'email',
     type: 'email',
-    placeholder: 'i202312345@cibertec.edu.pe',
-    label: 'Correo institucional'
+    placeholder: 'dev.alessandro@outlook.com',
+    label: 'Correo electrónico'
   },
   {
     name: 'password',
