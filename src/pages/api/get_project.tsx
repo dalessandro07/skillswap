@@ -1,16 +1,25 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { URL } from 'url'
+import { NextRequest } from 'next/server'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export const config = {
+  runtime: 'edge',
+  regions: ['iad1']
+}
+
+export default async function handler(req: NextRequest) {
   if (req.method !== 'POST') {
-    res.status(404).json({ message: 'Method not allowed' })
-    return
+    return new Response(
+      JSON.stringify({
+        message: 'Method Not Allowed'
+      }),
+      { status: 405 }
+    )
   }
 
-  const { url } = req.body
+  const { url } = await req.json()
 
   try {
     const websiteUrl = new URL(url)
+
     if (websiteUrl.protocol !== 'http:' && websiteUrl.protocol !== 'https:') {
       throw new Error('URL must have http or https protocol')
     }
@@ -22,15 +31,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const description = html.match(/<meta.*?name="description".*?content="(.*?)".*?>/)?.[1]
 
     if (!title) {
-      res.status(500).json({ message: 'No se pudo obtener el título.' })
+      return new Response(JSON.stringify({ message: 'No se pudo obtener el título.' }), {
+        status: 500
+      })
     }
 
     if (!description) {
-      res.status(500).json({ message: 'No se pudo obtener la descripción.' })
+      return new Response(JSON.stringify({ message: 'No se pudo obtener la descripción.' }), {
+        status: 500
+      })
     }
 
-    res.status(200).json({ title, description })
+    return new Response(JSON.stringify({ title, description }), { status: 200 })
   } catch (error: any) {
-    res.status(500).json({ message: error.message })
+    return new Response(JSON.stringify({ message: error.message }), { status: 500 })
   }
 }

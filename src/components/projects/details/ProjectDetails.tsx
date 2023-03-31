@@ -8,8 +8,7 @@ import { memo } from 'react'
 function ProjectDetails({ project }: { project: ProjectType }) {
   const { user } = useGetUser()
 
-  const { creator } = project
-  const isCreator = user?.user_metadata?.username === creator.username
+  const isCreator = user?.id === project.creator_id
 
   return (
     <section className="flex flex-col items-center w-2/3 mx-auto py-12">

@@ -30,8 +30,8 @@ export default function useLikes(projectId: number) {
     if (likeOrUnlike === 'like') {
       updatedLikes.push({
         id: `${projectId}-${user.id}`,
-        creator_id: user.id,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        creator_id: user.id
       })
     } else {
       const likeIndex = updatedLikes.findIndex((like) => like.id === `${projectId}-${user?.id}`)
@@ -44,7 +44,7 @@ export default function useLikes(projectId: number) {
     const { error } = await supabaseClient
       .from('projects')
       .update({
-        likes: updatedLikes
+        likes: [...updatedLikes]
       })
       .eq('id', projectId)
 
