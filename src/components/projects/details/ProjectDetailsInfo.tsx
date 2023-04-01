@@ -19,7 +19,7 @@ export default function ProjectDetailsInfo({ project }: { project: ProjectType }
         <p className="text-sm text-gray-500 capitalize">{project.category}</p>
       </div>
 
-      <p className="text-sm opacity-80">{project.description}</p>
+      <p className="text-sm opacity-80 capitalize">{project.description}</p>
 
       <ProjectReactions
         comments={project.comments}
