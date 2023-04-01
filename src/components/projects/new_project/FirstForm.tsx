@@ -20,7 +20,7 @@ export default function FirstForm({
         fields={{
           name: 'url',
           type: 'text',
-          placeholder: 'https://skillswap.vercel.app'
+          placeholder: 'Ej. https://skillswap.vercel.app'
         }}>
         <p className="flex gap-1 items-baseline">
           Ingresa la URL del proyecto

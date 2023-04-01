@@ -16,7 +16,7 @@ export default function ProjectDetailsInfo({ project }: { project: ProjectType }
     <article className="flex flex-col justify-center items-center gap-5 p-8 w-full">
       <div className="flex flex-col items-center">
         <h1 className="text-3xl font-bold">{project.title}</h1>
-        <p className="text-sm text-gray-500 capitalize">{project.category}</p>
+        <p className="text-sm text-gray-500">{project.category}</p>
       </div>
 
       <p className="text-sm opacity-80 capitalize">{project.description}</p>

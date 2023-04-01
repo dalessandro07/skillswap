@@ -8,25 +8,25 @@ const PROJECT_FIELDS: InputFieldsType[] = [
   {
     name: 'title',
     type: 'text',
-    placeholder: 'SkillSwap',
+    placeholder: 'Ej. SkillSwap',
     label: 'Título'
   },
   {
     name: 'description',
     type: 'text',
-    placeholder: 'SkillSwap es ...',
+    placeholder: 'Ej. SkillSwap es ...',
     label: 'Descripción'
   },
   {
     name: 'image',
     type: 'text',
-    placeholder: 'https://i.imgur.com/...',
-    label: 'Imagen (imgur)'
+    placeholder: 'Ej. https://i.imgur.com/hMGfX6f.png',
+    label: 'Imagen (i.imgur, incluyendo la extensión)'
   },
   {
     name: 'url',
     type: 'text',
-    placeholder: 'https://skillswap.vercel.app',
+    placeholder: 'Ej. https://skillswap.vercel.app',
     label: 'Demo o Repositorio'
   }
 ]
