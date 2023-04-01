@@ -19,10 +19,13 @@ export const useFetchProjects = (supabaseClient: SupabaseClient) => {
       const { data: projects, error } = await supabaseClient
         .from('projects')
         .select('*')
-        .order('id', { ascending: false })
+        .order('likes')
+
       setLoading({ id, status: false })
 
       if (error) return toast.error(error.message)
+
+      projects.sort((a, b) => b.likes.length - a.likes.length)
 
       setProjects(projects as ProjectType[])
     },

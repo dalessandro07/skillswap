@@ -8,19 +8,19 @@ const REGISTER_FIELDS: InputFieldsType[] = [
   {
     name: 'fullName',
     type: 'text',
-    placeholder: 'Alessandro Rios',
+    placeholder: 'Ej. Alessandro Rios',
     label: 'Nombres completos'
   },
   {
     name: 'username',
     type: 'text',
-    placeholder: 'dalessandro07',
+    placeholder: 'Ej. dalessandro07',
     label: 'Nombre de usuario'
   },
   {
     name: 'email',
     type: 'email',
-    placeholder: 'dev.alessandro@outlook.com',
+    placeholder: 'Ej. dev.alessandro@outlook.com',
     label: 'Correo electrónico (se enviará una confirmación)'
   },
   {

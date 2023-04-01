@@ -8,7 +8,7 @@ const LOGIN_FIELDS: InputFieldsType[] = [
   {
     name: 'email',
     type: 'email',
-    placeholder: 'dev.alessandro@outlook.com',
+    placeholder: 'Ej. dev.alessandro@outlook.com',
     label: 'Correo electrónico'
   },
   {
