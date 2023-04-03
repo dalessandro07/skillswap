@@ -1,4 +1,4 @@
-import useComment from '@/hooks/projects/useComment'
+import useComment from '@/hooks/comments/useComment'
 import Input from '@/components/form/Input'
 import { ProjectType } from '@/types'
 

@@ -21,7 +21,7 @@ const PROJECT_FIELDS: InputFieldsType[] = [
     name: 'image',
     type: 'text',
     placeholder: 'Ej. https://i.imgur.com/hMGfX6f.png',
-    label: 'Imagen (i.imgur, incluyendo la extensión)'
+    label: 'Imagen (i.imgur, netlify, vercel, etc.)'
   },
   {
     name: 'url',

@@ -22,7 +22,7 @@ export interface CommentType {
   createdAt: string
   updatedAt: string
   content: string
-  likes: number
+  likes: LikeType[]
 }
 
 export interface ProjectType {

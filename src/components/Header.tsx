@@ -24,7 +24,7 @@ function Header() {
           <Link
             className="text-sm hover:text-orange-500 transition-colors duration-200 hover:border-orange-600 border-b border-transparent"
             href="/user">
-            {user?.user_metadata.username}
+            {user?.user_metadata.username || user?.user_metadata.email.split('@')[0]}
           </Link>
         ) : (
           <Link

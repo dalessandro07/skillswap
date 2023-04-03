@@ -3,9 +3,19 @@ import useLikes from '@/hooks/projects/useLikes'
 import useGetUser from '@/hooks/session/useGetUser'
 import { useEffect } from 'react'
 
-export default function LikeButton({ likes, projectId }: { likes: number; projectId: number }) {
+export default function LikeButton({
+  likes,
+  projectId,
+  destination = 'project',
+  commentId = null
+}: {
+  likes: number
+  projectId: number
+  destination?: 'project' | 'comment'
+  commentId?: string | null
+}) {
   const { user } = useGetUser()
-  const { handleLike } = useLikes(projectId)
+  const { handleLikeProject, handleLikeComment } = useLikes(projectId)
   const { projects, setLikedProjects } = useProjectsStore()
 
   useEffect(() => {
@@ -16,15 +26,36 @@ export default function LikeButton({ likes, projectId }: { likes: number; projec
     setLikedProjects(likedProjects)
   }, [projects, setLikedProjects, user])
 
-  const isLiked = projects.some((project) => {
+  const isProjectLiked = projects.some((project) => {
     return project.id === projectId && project.likes.some((like) => like.creator_id === user?.id)
   })
 
+  const isCommentLiked = projects.some(
+    (project) =>
+      project.id === projectId &&
+      project.comments.some(
+        (comment) =>
+          comment.id === commentId && comment.likes.some((like) => like.creator_id === user?.id)
+      )
+  )
+
   return (
-    <div className="flex group items-center gap-1 opacity-80">
+    <div className="flex group items-center gap-1 opacity-80 w-max">
       <button
-        title={isLiked ? 'Cancelar Me gusta' : 'Me gusta'}
-        onClick={handleLike}
+        title={
+          destination === 'project'
+            ? isProjectLiked
+              ? 'Cancelar me gusta'
+              : 'Me gusta'
+            : isCommentLiked
+            ? 'Cancelar me gusta'
+            : 'Me gusta'
+        }
+        onClick={
+          destination === 'project'
+            ? handleLikeProject
+            : () => handleLikeComment(commentId as string)
+        }
         className="hover:bg-red-500 p-1 rounded-full hover:bg-opacity-25 transition-all duration-150">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +64,13 @@ export default function LikeButton({ likes, projectId }: { likes: number; projec
           strokeWidth={1.5}
           stroke="currentColor"
           className={`${
-            isLiked ? 'fill-current active:fill-none' : 'stroke-current active:fill-current'
+            destination === 'project'
+              ? isProjectLiked
+                ? 'fill-current active:fill-none'
+                : 'stroke-current active:fill-current'
+              : isCommentLiked
+              ? 'fill-current active:fill-none'
+              : 'stroke-current active:fill-current'
           } w-5 h-5 text-gray-400 transition-all duration-150 group-hover:text-red-500`}>
           <path
             strokeLinecap="round"

@@ -3,6 +3,7 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { toast } from 'react-hot-toast'
 import { useState } from 'react'
 import useGetUser from '../session/useGetUser'
+import useLikeComments from '../comments/useLikeComments'
 
 export default function useLikes(projectId: number) {
   const supabaseClient = useSupabaseClient()
@@ -14,6 +15,12 @@ export default function useLikes(projectId: number) {
   const [isLiked, setIsLiked] = useState<boolean>(
     likedProjects.some((project) => project.id === projectId)
   )
+
+  const { handleLikeComment } = useLikeComments({
+    projectId
+  })
+
+  // Like Project
 
   async function toggleLike({
     projectId,
@@ -53,7 +60,7 @@ export default function useLikes(projectId: number) {
     }
   }
 
-  async function handleLike() {
+  async function handleLikeProject() {
     if (!projectToLike) return toast.error('No se encontró el proyecto.')
     if (!user) return toast.error('Inicia sesión para reaccionar.')
 
@@ -71,7 +78,8 @@ export default function useLikes(projectId: number) {
   }
 
   return {
-    handleLike,
+    handleLikeProject,
+    handleLikeComment,
     isLiked
   }
 }

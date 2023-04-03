@@ -28,6 +28,9 @@ export default function useNewProject(
   const router = useRouter()
   const { user } = useGetUser()
 
+  const username = user?.user_metadata.username || user?.user_metadata.email.split('@')[0] || ''
+  const fullName = user?.user_metadata.fullName || user?.user_metadata.full_name || ''
+
   const {
     register,
     handleSubmit,
@@ -38,8 +41,8 @@ export default function useNewProject(
     defaultValues: {
       ...defaultValues,
       creator: {
-        username: user?.user_metadata.username || '',
-        fullName: user?.user_metadata.fullName || ''
+        username,
+        fullName
       }
     }
   })

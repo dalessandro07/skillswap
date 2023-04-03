@@ -8,6 +8,8 @@ import { useProjectsStore } from '@/context/useProjectsStore'
 export default function UserPage({ user }: { user: User }) {
   const { projects, likedProjects, setLikedProjects } = useProjectsStore()
 
+  console.log(user)
+
   useEffect(() => {
     const likedProjects = projects.filter((project) => {
       return project.likes.some((like) => like.creator_id === user.id)
@@ -19,7 +21,9 @@ export default function UserPage({ user }: { user: User }) {
   return (
     <section className="flex flex-col grow justify-center items-center gap-10">
       <article className="flex items-center gap-1">
-        <h1>Bienvenido, {user.user_metadata.username}</h1>
+        <h1>
+          Bienvenido, @{user.user_metadata.username || user.user_metadata.email.split('@')[0]}
+        </h1>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -36,7 +40,7 @@ export default function UserPage({ user }: { user: User }) {
       </article>
 
       <article className="flex items-center flex-col">
-        <p>Nombre: {user.user_metadata.fullName}</p>
+        <p>Nombre: {user.user_metadata.fullName || user.user_metadata.full_name}</p>
         <p>Correo: {user.email}</p>
       </article>
 

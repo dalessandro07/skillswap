@@ -13,6 +13,8 @@ export default function useComment(projectId: number) {
   const selectedProject = projects.find((project) => project.id === projectId)
   const commentsLength = selectedProject?.comments.length || 0
 
+  const username = user?.user_metadata.username || user?.user_metadata.email.split('@')[0] || ''
+
   const {
     register,
     handleSubmit,
@@ -20,12 +22,12 @@ export default function useComment(projectId: number) {
   } = useForm<CommentType>({
     mode: 'onChange',
     defaultValues: {
-      id: `${commentsLength + 1}-${user?.user_metadata.username || ''}`,
-      author: user?.user_metadata.username || '',
+      id: `${commentsLength + 1}-${username}`,
+      author: username,
       content: '',
       createdAt: `${new Date().toISOString().split('.')[0]}`,
       updatedAt: `${new Date().toISOString().split('.')[0]}`,
-      likes: 0
+      likes: []
     }
   })
 

@@ -40,8 +40,10 @@ export default function useLogin() {
         return toast.error(error.message)
       }
 
+      const username = user?.user_metadata.username || user?.user_metadata.email.split('@')[0] || ''
+
       if (user) {
-        toast.success(`¡Bienvenido ${user.user_metadata.username}!`)
+        toast.success(`¡Bienvenido ${username}!`)
       }
 
       router.push('/')
