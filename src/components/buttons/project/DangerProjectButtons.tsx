@@ -14,7 +14,7 @@ export default function DangerProjectButtons({
   title?: string
   id: number
   commentId?: string
-  destination: 'project' | 'comment'
+  destination?: 'project' | 'comment'
 }) {
   const { handleDeleteProject } = useDeleteProject()
   const { handleDeleteComment } = useDeleteComment()
