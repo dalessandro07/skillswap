@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import DeleteProjectButton from './DeleteProjectButton'
 import useDeleteProject from '@/hooks/projects/useDeleteProject'
 import EditProjectButton from './EditProjectButton'
+import DeleteProjectButton from './DeleteProjectButton'
 import DeleteCommentButton from './DeleteCommentButton'
 import useDeleteComment from '@/hooks/comments/useDeleteComment'
 

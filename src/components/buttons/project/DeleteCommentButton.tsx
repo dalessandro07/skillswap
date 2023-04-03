@@ -1,6 +1,6 @@
 import { memo } from 'react'
 
-function DeleteProjectButton({ handleClick }: { handleClick: () => void }) {
+function DeleteCommentButton({ handleClick }: { handleClick: () => void }) {
   return (
     <button
       onClick={handleClick}
@@ -23,4 +23,4 @@ function DeleteProjectButton({ handleClick }: { handleClick: () => void }) {
   )
 }
 
-export default memo(DeleteProjectButton)
+export default memo(DeleteCommentButton)
