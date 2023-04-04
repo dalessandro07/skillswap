@@ -11,6 +11,8 @@ export const useProjectsStore = create<ProjectsStoreType>((set) => {
       status: false,
       id: 0
     },
-    setLoading: (loading: { status: boolean; id: number }) => set({ loading })
+    setLoading: (loading: { status: boolean; id: number }) => set({ loading }),
+    filteredProjects: [] as ProjectType[],
+    setFilteredProjects: (filteredProjects: ProjectType[]) => set({ filteredProjects })
   }
 })

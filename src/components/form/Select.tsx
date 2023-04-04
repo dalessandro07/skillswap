@@ -1,11 +1,20 @@
 import type { SelectPropsType } from '@/types'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 export default function Select({ fields, children, register, errors }: SelectPropsType) {
   const hasError = errors[fields.name]
 
+  const [parent] = useAutoAnimate()
+
   return (
     <div className="flex flex-col gap-2 w-full">
-      {children && <label htmlFor={fields.name}>{children}</label>}
+      {children && (
+        <label
+          className="min-w-0 whitespace-nowrap overflow-hidden text-ellipsis"
+          htmlFor={fields.name}>
+          {children}
+        </label>
+      )}
 
       <div className="flex flex-col py-2">
         <select
@@ -26,9 +35,11 @@ export default function Select({ fields, children, register, errors }: SelectPro
           ))}
         </select>
 
-        {hasError && (
-          <span className="text-red-500 text-sm">{errors[fields.name]?.message as string}</span>
-        )}
+        <div ref={parent}>
+          {hasError && (
+            <span className="text-red-500 text-sm">{errors[fields.name]?.message as string}</span>
+          )}
+        </div>
       </div>
     </div>
   )

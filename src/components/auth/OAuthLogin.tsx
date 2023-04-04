@@ -6,15 +6,13 @@ export default function OAuthLogin() {
   const supabaseClient = useSupabaseClient()
 
   async function signInWithGoogle() {
-    const { data, error } = await supabaseClient.auth.signInWithOAuth({
+    const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: 'google'
     })
 
     if (error) {
       return toast.error(error.message)
     }
-
-    return toast.success('Iniciaste sesión con Google.')
   }
 
   return (

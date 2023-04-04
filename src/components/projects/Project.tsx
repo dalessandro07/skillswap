@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { ProjectType } from '@/types'
 import ProjectReactions from './ProjectReactions'
 import useRouteTitle from '@/hooks/projects/useRouteTitle'
+import UserAvatar from '../user/UserAvatar'
 import { memo } from 'react'
 
 function Project({ project }: { project: ProjectType }) {
@@ -14,7 +15,9 @@ function Project({ project }: { project: ProjectType }) {
   return (
     <section className="flex flex-col gap-4">
       <article className="flex flex-col grow gap-2">
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 pl-0.5">
+          <UserAvatar user={project.creator} size="xs" />
+
           <p className="text-xs opacity-80 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
             @{project.creator.username}
           </p>

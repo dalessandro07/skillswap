@@ -1,4 +1,5 @@
 import HeroIndex from '@/components/hero/HeroIndex'
+import ProjectsList from '@/components/projects/ProjectsList'
 import Head from 'next/head'
 
 export default function Home() {
@@ -13,6 +14,13 @@ export default function Home() {
       </Head>
 
       <HeroIndex />
+
+      <section>
+        <h2 className="text-2xl font-bold pb-2 w-max">Proyectos más gustados</h2>
+        <article className="py-10">
+          <ProjectsList />
+        </article>
+      </section>
     </>
   )
 }

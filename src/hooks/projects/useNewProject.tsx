@@ -11,7 +11,8 @@ export default function useNewProject(
   defaultValues: Partial<ProjectType> = {
     creator: {
       username: '',
-      fullName: ''
+      fullName: '',
+      avatar_url: ''
     },
     updatedAt: `${new Date().toISOString().split('.')[0]}`,
     title: '',
@@ -30,6 +31,7 @@ export default function useNewProject(
 
   const username = user?.user_metadata.username || user?.user_metadata.email.split('@')[0] || ''
   const fullName = user?.user_metadata.fullName || user?.user_metadata.full_name || ''
+  const avatar_url = user?.user_metadata.avatar_url || ''
 
   const {
     register,
@@ -42,7 +44,8 @@ export default function useNewProject(
       ...defaultValues,
       creator: {
         username,
-        fullName
+        fullName,
+        avatar_url
       }
     }
   })

@@ -7,7 +7,7 @@ export default function NewComment({ project }: { project: ProjectType }) {
 
   return (
     <form className="w-full" onSubmit={handleSubmit(handleComment)} action="">
-      <div className="flex items-baseline gap-2 w-full">
+      <div className="flex items-center gap-2 w-full">
         <Input
           register={register}
           errors={errors}
@@ -20,7 +20,7 @@ export default function NewComment({ project }: { project: ProjectType }) {
 
         <button
           type="submit"
-          className="hover:scale-125 transition-all duration-200"
+          className="hover:scale-125 transition-all duration-200 hover:text-orange-500 p-1 hover:animate-pulse"
           aria-label="Comentar">
           <svg
             xmlns="http://www.w3.org/2000/svg"

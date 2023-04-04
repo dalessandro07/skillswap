@@ -50,9 +50,9 @@ export default function Register() {
 
       <form className="flex flex-col gap-5" onSubmit={handleSubmit(handleRegister)}>
         <div className="flex items-center gap-2">
-          <div className="w-full border-b border-gray-500"></div>
+          <div className="w-full border-b border-gray-600"></div>
           <span className="text-gray-500">ó</span>
-          <div className="w-full border-b border-gray-500"></div>
+          <div className="w-full border-b border-gray-600"></div>
         </div>
 
         <section className="flex flex-col gap-2 my-5">

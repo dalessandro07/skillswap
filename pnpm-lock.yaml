@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@formkit/auto-animate': 1.0.0-beta.6
   '@supabase/auth-helpers-nextjs': ^0.5.6
   '@supabase/auth-helpers-react': ^0.3.1
   '@supabase/supabase-js': ^2.12.1
@@ -23,6 +24,7 @@ specifiers:
   zustand: ^4.3.6
 
 dependencies:
+  '@formkit/auto-animate': 1.0.0-beta.6
   '@supabase/auth-helpers-nextjs': 0.5.6_pz5pnydt2nehkak4aetyy3l46i
   '@supabase/auth-helpers-react': 0.3.1_pz5pnydt2nehkak4aetyy3l46i
   '@supabase/supabase-js': 2.12.1
@@ -183,6 +185,10 @@ packages:
   /@eslint/js/8.36.0:
     resolution: {integrity: sha512-lxJ9R5ygVm8ZWgYdUweoq5ownDlJ4upvoWmO4eLxBYHdMo+vZ/Rx0EN6MbKWDJOSUGrqJy2Gt+Dyv/VKml0fjg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: false
+
+  /@formkit/auto-animate/1.0.0-beta.6:
+    resolution: {integrity: sha512-PVDhLAlr+B4Xb7e+1wozBUWmXa6BFU8xUPR/W/E+TsQhPS1qkAdAsJ25keEnFrcePSnXHrOsh3tiFbEToOzV9w==}
     dev: false
 
   /@humanwhocodes/config-array/0.11.8:

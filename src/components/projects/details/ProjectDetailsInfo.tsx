@@ -4,6 +4,7 @@ import NewComment from '../comments/NewComment'
 
 import ProjectComments from '../comments/ProjectComments'
 import ProjectReactions from '../ProjectReactions'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 export default function ProjectDetailsInfo({ project }: { project: ProjectType }) {
   const [showComments, setShowComments] = useState(true)
@@ -12,14 +13,16 @@ export default function ProjectDetailsInfo({ project }: { project: ProjectType }
     setShowComments((prev) => !prev)
   }
 
+  const [parent] = useAutoAnimate()
+
   return (
     <article className="flex flex-col justify-center items-center gap-5 p-8 w-full">
       <div className="flex flex-col items-center">
         <h1 className="text-3xl font-bold">{project.title}</h1>
-        <p className="text-sm text-gray-500">{project.category}</p>
+        <p className="text-sm text-gray-500 capitalize">{project.category}</p>
       </div>
 
-      <p className="text-sm opacity-80 capitalize">{project.description}</p>
+      <p className="text-sm text-gray-300">{project.description}</p>
 
       <ProjectReactions
         comments={project.comments}
@@ -31,7 +34,9 @@ export default function ProjectDetailsInfo({ project }: { project: ProjectType }
 
       <NewComment project={project} />
 
-      {showComments && <ProjectComments project={project} />}
+      <div ref={parent} className="w-full">
+        {showComments && <ProjectComments project={project} />}
+      </div>
     </article>
   )
 }

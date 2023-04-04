@@ -1,19 +1,20 @@
 import { ProjectType } from '@/types'
 import Link from 'next/link'
 import Image from 'next/image'
+import UserAvatar from '@/components/user/UserAvatar'
+import { memo } from 'react'
 
-export default function ProjectDetailsHero({ project }: { project: ProjectType }) {
+function ProjectDetailsHero({ project }: { project: ProjectType }) {
   const creationDate = new Date(project.createdAt).toLocaleDateString('es-ES')
 
   return (
     <article className="flex flex-col gap-2 w-full py-6">
-      <div className="flex gap-2 px-2">
-        <p className="hidden lg:flex gap-2">
-          Un proyecto de <strong>{project.creator.fullName}</strong> ·
-        </p>
-        <p>@{project.creator.username} ·</p>
-        <p>{creationDate}</p>
-      </div>
+      <section className="flex items-baseline gap-2 px-2">
+        <UserAvatar size="sm" user={project.creator} />
+        <p className="hidden font-bold lg:flex gap-2">{project.creator.fullName} ·</p>
+        <p className="text-gray-300">@{project.creator.username} ·</p>
+        <p className="text-gray-300">{creationDate}</p>
+      </section>
 
       <section className="relative">
         <Image
@@ -50,3 +51,5 @@ export default function ProjectDetailsHero({ project }: { project: ProjectType }
     </article>
   )
 }
+
+export default memo(ProjectDetailsHero)

@@ -36,11 +36,20 @@ export interface ProjectType {
   creator: {
     username: string
     fullName: string
+    avatar_url: string
   }
   url: string
   likes: LikeType[]
   comments: CommentType[]
   creator_id: string
+}
+
+/* Filters */
+
+export interface FiltersType {
+  category: string
+  likes: string
+  date: string
 }
 
 /* Zustand - Projects Store */
@@ -55,11 +64,16 @@ export interface ProjectsStoreType {
     id: number
   }
   setLoading: ({ status, id }: { status: boolean; id: number }) => void
+  filteredProjects: ProjectType[]
+  setFilteredProjects: (projects: ProjectType[]) => void
 }
 
 /* React Hook Form - Forms */
 
-export type FieldValuesType = UserDataType & ProjectType & CommentType
+export type FieldValuesType = UserDataType &
+  ProjectType &
+  CommentType &
+  FiltersType
 
 export interface InputPropsType {
   fields: {

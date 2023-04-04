@@ -3,9 +3,8 @@ import DangerProjectButtons from '../../buttons/project/DangerProjectButtons'
 import ProjectDetailsInfo from './ProjectDetailsInfo'
 import ProjectDetailsHero from './ProjectDetailsHero'
 import { ProjectType } from '@/types'
-import { memo } from 'react'
 
-function ProjectDetails({ project }: { project: ProjectType }) {
+export default function ProjectDetails({ project }: { project: ProjectType }) {
   const { user } = useGetUser()
 
   const isCreator = user?.id === project.creator_id
@@ -20,5 +19,3 @@ function ProjectDetails({ project }: { project: ProjectType }) {
     </section>
   )
 }
-
-export default memo(ProjectDetails)

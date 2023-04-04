@@ -1,12 +1,24 @@
 import { useProjectsStore } from '@/context/useProjectsStore'
 import ProjectContainer from './ProjectContainer'
 import type { ProjectType } from '@/types'
+import { useEffect, useState } from 'react'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 export default function ProjectsList() {
-  const { projects, loading } = useProjectsStore()
+  const { projects, filteredProjects, loading } = useProjectsStore()
+  const [selectedProjects, setSelectedProjects] = useState<ProjectType[]>([])
+  const [parent] = useAutoAnimate()
+
+  useEffect(() => {
+    if (filteredProjects.length > 0) {
+      setSelectedProjects(filteredProjects)
+    } else {
+      setSelectedProjects(projects)
+    }
+  }, [filteredProjects, projects])
 
   return (
-    <section className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 py-10">
+    <article>
       {loading.status && projects.length === 0 && (
         <p className="text-xl font-bold py-6 animate-pulse">Cargando proyectos...</p>
       )}
@@ -15,9 +27,13 @@ export default function ProjectsList() {
         <p className="py-6">No hay proyectos disponibles</p>
       )}
 
-      {projects.map((project: ProjectType) => (
-        <ProjectContainer key={project.id} project={project} loading={loading} />
-      ))}
-    </section>
+      <ul
+        ref={parent}
+        className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+        {selectedProjects.map((project: ProjectType) => (
+          <ProjectContainer key={project.id} project={project} loading={loading} />
+        ))}
+      </ul>
+    </article>
   )
 }

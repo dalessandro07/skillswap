@@ -2,6 +2,7 @@ import useGetUser from '@/hooks/session/useGetUser'
 import Image from 'next/image'
 import Link from 'next/link'
 import { memo } from 'react'
+import UserAvatar from './user/UserAvatar'
 
 function Header() {
   const { user } = useGetUser()
@@ -20,11 +21,15 @@ function Header() {
           Proyectos
         </Link>
 
+        <Link
+          className="text-sm hover:text-orange-500 transition-colors duration-200 hover:border-orange-600 border-b border-transparent"
+          href="/projects/new_project">
+          Nuevo proyecto
+        </Link>
+
         {user ? (
-          <Link
-            className="text-sm hover:text-orange-500 transition-colors duration-200 hover:border-orange-600 border-b border-transparent"
-            href="/user">
-            {user?.user_metadata.username || user?.user_metadata.email.split('@')[0]}
+          <Link className="hover:scale-110 transition-all duration-200" href="/user">
+            <UserAvatar user={user} size="sm" />
           </Link>
         ) : (
           <Link
