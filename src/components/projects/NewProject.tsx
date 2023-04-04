@@ -31,6 +31,11 @@ function NewProject({
       })
 
   useEffect(() => {
+    if (!user) {
+      toast.error('Inicia sesión para poder crear un proyecto.')
+      router.push('/login')
+    }
+
     if (type === 'edit' && defaultValues?.creator_id !== user?.id) {
       toast.error('No tienes permisos para editar este proyecto')
       router.push('/projects')

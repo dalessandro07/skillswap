@@ -70,10 +70,16 @@ export interface ProjectsStoreType {
 
 /* React Hook Form - Forms */
 
+export interface EditUserType {
+  fullName: string
+  avatar_url: string
+}
+
 export type FieldValuesType = UserDataType &
   ProjectType &
   CommentType &
-  FiltersType
+  FiltersType &
+  EditUserType
 
 export interface InputPropsType {
   fields: {

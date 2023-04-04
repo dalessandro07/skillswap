@@ -21,16 +21,18 @@ function Header() {
           Proyectos
         </Link>
 
-        <Link
-          className="text-sm hover:text-orange-500 transition-colors duration-200 hover:border-orange-600 border-b border-transparent"
-          href="/projects/new_project">
-          Nuevo proyecto
-        </Link>
-
         {user ? (
-          <Link className="hover:scale-110 transition-all duration-200" href="/user">
-            <UserAvatar user={user} size="sm" />
-          </Link>
+          <>
+            <Link
+              className="text-sm hover:text-orange-500 transition-colors duration-200 hover:border-orange-600 border-b border-transparent"
+              href="/projects/new_project">
+              Nuevo proyecto
+            </Link>
+
+            <Link className="hover:scale-110 transition-all duration-200" href="/user">
+              <UserAvatar user={user} size="sm" />
+            </Link>
+          </>
         ) : (
           <Link
             className="text-sm hover:text-orange-500 transition-colors duration-200 hover:border-orange-600 border-b border-transparent"

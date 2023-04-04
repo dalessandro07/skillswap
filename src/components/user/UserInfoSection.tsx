@@ -1,12 +1,30 @@
 import UserAvatar from './UserAvatar'
 import SignOut from '../auth/SignOut'
 import { User } from '@supabase/supabase-js'
+import { useState } from 'react'
+import IconEditUser from '../auth/IconEditUser'
+import ModalEditUser from './ModalEditUser'
 
 export default function UserInfoSection({ user }: { user: User }) {
+  const [showEditPhoto, setShowEditPhoto] = useState(false)
+  const [showEditName, setShowEditName] = useState(false)
+
+  function toggleShowPhoto() {
+    setShowEditPhoto(!showEditPhoto)
+  }
+
+  function toggleShowName() {
+    setShowEditName(!showEditName)
+  }
+
   return (
     <article className="flex flex-col justify-center pr-10 gap-10 border-r border-b border-gray-600">
       <section className="flex flex-col gap-5">
-        <UserAvatar user={user} size="lg" />
+        <article className="flex items-start">
+          <UserAvatar user={user} size="lg" />
+
+          <IconEditUser toggleShow={toggleShowPhoto} field="foto de perfil" />
+        </article>
 
         <article className="flex gap-1">
           <h1 className="flex gap-1.5 text-gray-300">
@@ -32,18 +50,28 @@ export default function UserInfoSection({ user }: { user: User }) {
       </section>
 
       <section className="flex flex-col">
-        <p className="flex gap-1.5 text-gray-300">
-          Nombre:
-          <span className="text-white">
-            {user.user_metadata.fullName || user.user_metadata.full_name}
-          </span>
-        </p>
+        <article className="flex gap-2 items-center">
+          <p className="flex gap-1.5 text-gray-300">
+            Nombre:
+            <span className="text-white">
+              {user.user_metadata.fullName || user.user_metadata.full_name}
+            </span>
+          </p>
+
+          <IconEditUser toggleShow={toggleShowName} field="nombre" />
+        </article>
+
         <p className="text-gray-300">
           Correo: <span className="text-white">{user.email}</span>
         </p>
       </section>
 
       <SignOut />
+
+      {showEditName && <ModalEditUser toggleShow={toggleShowName} label="nombre" name="fullName" />}
+      {showEditPhoto && (
+        <ModalEditUser toggleShow={toggleShowPhoto} label="foto de perfil" name="avatar_url" />
+      )}
     </article>
   )
 }

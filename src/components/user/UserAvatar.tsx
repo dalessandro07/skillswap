@@ -22,7 +22,7 @@ function UserAvatar({
   if ('user_metadata' in user) {
     selectedUser = {
       username: user.user_metadata.username || user.email?.split('@')[0],
-      fullName: user.user_metadata.full_name,
+      fullName: user.user_metadata.full_name || user.user_metadata.fullName,
       avatar_url: user.user_metadata.avatar_url
     }
   } else {
@@ -40,7 +40,7 @@ function UserAvatar({
     size === 'xs'
       ? 'w-6 h-6 text-xs'
       : size === 'sm'
-      ? 'w-10 h-10 text-lg'
+      ? 'w-10 h-10 text-xl'
       : size === 'md'
       ? 'w-14 h-14 text-2xl'
       : 'w-16 h-16 text-4xl'
@@ -48,16 +48,18 @@ function UserAvatar({
   return (
     <section className="w-max">
       {selectedUser.avatar_url ? (
-        <Image
-          className="text-white rounded-full"
-          src={selectedUser.avatar_url}
-          alt="User avatar"
-          width={avatarImageSize}
-          height={avatarImageSize}
-        />
+        <article className={`${avatarLetterSize}`}>
+          <Image
+            className="text-white object-cover rounded-full w-full h-full object-left-top"
+            src={selectedUser.avatar_url}
+            alt="User avatar"
+            width={avatarImageSize}
+            height={avatarImageSize}
+          />
+        </article>
       ) : (
         <div
-          className={`${avatarLetterSize} rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-tr from-orange-500 to-orange-700 uppercase`}>
+          className={`${avatarLetterSize} rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-tr from-orange-500 to-orange-700 uppercase overflow-hidden`}>
           {avatarLetter}
         </div>
       )}

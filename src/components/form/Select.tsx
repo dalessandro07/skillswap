@@ -19,7 +19,7 @@ export default function Select({ fields, children, register, errors }: SelectPro
       <div className="flex flex-col py-2">
         <select
           className={`
-          border-b p-2 focus:outline-none
+          border-b p-2 focus:outline-none bg-transparent
           ${hasError ? 'border-red-500' : 'border-gray-300'}
         `}
           {...register(fields.name, {
