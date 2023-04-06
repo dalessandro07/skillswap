@@ -6,6 +6,7 @@ interface UserOrCreatorType {
   username: string
   fullName: string
   avatar_url: string
+  portfolio?: string
 }
 
 function UserAvatar({
@@ -23,13 +24,15 @@ function UserAvatar({
     selectedUser = {
       username: user.user_metadata.username || user.email?.split('@')[0],
       fullName: user.user_metadata.full_name || user.user_metadata.fullName,
-      avatar_url: user.user_metadata.avatar_url
+      avatar_url: user.user_metadata.avatar_url,
+      portfolio: user.user_metadata.portfolio
     }
   } else {
     selectedUser = {
       username: user.username,
       fullName: user.fullName,
-      avatar_url: user.avatar_url
+      avatar_url: user.avatar_url,
+      portfolio: user.portfolio
     }
   }
 
@@ -47,22 +50,25 @@ function UserAvatar({
 
   return (
     <section className="w-max">
-      {selectedUser.avatar_url ? (
-        <article className={`${avatarLetterSize}`}>
-          <Image
-            className="text-white object-cover rounded-full w-full h-full object-left-top"
-            src={selectedUser.avatar_url}
-            alt="User avatar"
-            width={avatarImageSize}
-            height={avatarImageSize}
-          />
-        </article>
-      ) : (
-        <div
-          className={`${avatarLetterSize} rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-tr from-orange-500 to-orange-700 uppercase overflow-hidden`}>
-          {avatarLetter}
-        </div>
-      )}
+      <a href={selectedUser.portfolio} target="_blank">
+        {selectedUser.avatar_url ? (
+          <article className={`${avatarLetterSize}`}>
+            <Image
+              className="text-white object-cover rounded-full w-full h-full object-left-top"
+              src={selectedUser.avatar_url}
+              alt="User avatar"
+              width={avatarImageSize}
+              height={avatarImageSize}
+            />
+          </article>
+        ) : (
+          <div
+            className={`${avatarLetterSize} rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-tr from-orange-500 to-orange-700 uppercase overflow-hidden`}>
+            {avatarLetter}
+          </div>
+        )}
+        <span className="sr-only">Ver perfil de {selectedUser.username}</span>
+      </a>
     </section>
   )
 }

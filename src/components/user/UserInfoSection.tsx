@@ -3,12 +3,12 @@ import SignOut from '../auth/SignOut'
 import { User } from '@supabase/supabase-js'
 import { useState } from 'react'
 import IconEditUser from '../auth/IconEditUser'
-import ModalEditUser from './ModalEditUser'
-import Link from 'next/link'
+import EditModalsContainer from './EditModalsContainer'
 
 export default function UserInfoSection({ user }: { user: User }) {
   const [showEditPhoto, setShowEditPhoto] = useState(false)
   const [showEditName, setShowEditName] = useState(false)
+  const [showEditPortfolio, setShowEditPortfolio] = useState(false)
 
   function toggleShowPhoto() {
     setShowEditPhoto(!showEditPhoto)
@@ -16,6 +16,10 @@ export default function UserInfoSection({ user }: { user: User }) {
 
   function toggleShowName() {
     setShowEditName(!showEditName)
+  }
+
+  function toggleShowPortfolio() {
+    setShowEditPortfolio(!showEditPortfolio)
   }
 
   return (
@@ -62,6 +66,15 @@ export default function UserInfoSection({ user }: { user: User }) {
           <IconEditUser toggleShow={toggleShowName} field="nombre" />
         </article>
 
+        <article className="flex gap-2 items-center">
+          <p className="flex gap-1.5 text-gray-300">
+            Portafolio:
+            <span className="text-white">{user.user_metadata.portfolio}</span>
+          </p>
+
+          <IconEditUser toggleShow={toggleShowPortfolio} field="portfolio" />
+        </article>
+
         <p className="text-gray-300">
           Correo: <span className="text-white">{user.email}</span>
         </p>
@@ -71,10 +84,14 @@ export default function UserInfoSection({ user }: { user: User }) {
         <SignOut />
       </section>
 
-      {showEditName && <ModalEditUser toggleShow={toggleShowName} label="nombre" name="fullName" />}
-      {showEditPhoto && (
-        <ModalEditUser toggleShow={toggleShowPhoto} label="foto de perfil" name="avatar_url" />
-      )}
+      <EditModalsContainer
+        showEditPhoto={showEditPhoto}
+        showEditName={showEditName}
+        showEditPortfolio={showEditPortfolio}
+        toggleShowPhoto={toggleShowPhoto}
+        toggleShowName={toggleShowName}
+        toggleShowPortfolio={toggleShowPortfolio}
+      />
     </article>
   )
 }

@@ -19,6 +19,12 @@ const REGISTER_FIELDS: InputFieldsType[] = [
     label: 'Nombre de usuario'
   },
   {
+    name: 'portfolio',
+    type: 'text',
+    placeholder: 'Ej. https://alessandrorios.com',
+    label: 'Portafolio o LinkedIn'
+  },
+  {
     name: 'email',
     type: 'email',
     placeholder: 'Ej. dev.alessandro@outlook.com',

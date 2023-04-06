@@ -3,7 +3,7 @@ import { memo } from 'react'
 function Footer() {
   return (
     <footer className="mt-10">
-      <p>
+      <p className="text-sm">
         Desarrollado por{' '}
         <a
           className="hover:text-blue-600 transition-colors duration-150 hover:border-blue-600 border-b border-transparent"

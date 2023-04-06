@@ -11,7 +11,11 @@ export default function useProjectFilters() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting }
-  } = useForm({
+  } = useForm<{
+    category: string
+    likes: string
+    date: string
+  }>({
     mode: 'onChange',
     defaultValues: {
       category: 'all',

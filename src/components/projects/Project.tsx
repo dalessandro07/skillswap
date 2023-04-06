@@ -18,9 +18,12 @@ function Project({ project }: { project: ProjectType }) {
         <div className="flex items-center gap-1 pl-0.5">
           <UserAvatar user={project.creator} size="xs" />
 
-          <p className="text-xs opacity-80 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
+          <a
+            href={project.creator.portfolio}
+            target="_blank"
+            className="text-xs opacity-80 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
             @{project.creator.username}
-          </p>
+          </a>
           <p className="opacity-80">·</p>
           <p className="text-xs opacity-80 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
             {new Date(project.createdAt).toLocaleDateString('es-ES')}

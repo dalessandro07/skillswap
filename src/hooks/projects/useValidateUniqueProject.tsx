@@ -8,10 +8,6 @@ export default function useValidateUniqueProject() {
     const checkExistence = (property: keyof ProjectType) =>
       projects.some((project) => project[property] === projectData[property])
 
-    if (checkExistence('title')) {
-      return 'Ya existe un proyecto con ese título.'
-    }
-
     if (checkExistence('url')) {
       return 'Ya existe un proyecto con esa url.'
     }

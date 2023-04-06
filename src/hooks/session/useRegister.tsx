@@ -3,6 +3,8 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { registerSchema } from '@/utils/zodSchemas'
 
 export default function useRegister() {
   const supabaseClient = useSupabaseClient()
@@ -17,15 +19,17 @@ export default function useRegister() {
     defaultValues: {
       fullName: '',
       username: '',
+      portfolio: '',
       email: '',
       password: ''
-    }
+    },
+    resolver: zodResolver(registerSchema)
   })
 
   async function handleRegister(userData: UserDataType) {
-    const { username, fullName, email, password } = userData
+    const { username, fullName, email, password, portfolio } = userData
 
-    if (!username || !fullName || !email || !password) {
+    if (!username || !fullName || !email || !password || !portfolio) {
       return
     }
 
@@ -36,7 +40,8 @@ export default function useRegister() {
         options: {
           data: {
             fullName,
-            username
+            username,
+            portfolio
           }
         }
       })

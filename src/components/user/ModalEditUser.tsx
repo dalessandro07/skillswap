@@ -5,11 +5,13 @@ import useEditUser from '@/hooks/session/useEditUser'
 export default function ModalEditUser({
   label,
   name,
-  toggleShow
+  toggleShow,
+  placeholder
 }: {
   label: string
-  name: 'fullName' | 'avatar_url'
+  name: 'fullName' | 'avatar_url' | 'portfolio'
   toggleShow: () => void
+  placeholder: string
 }) {
   const { register, handleSubmit, errors, isSubmitting, handleEdit } = useEditUser()
 
@@ -48,7 +50,7 @@ export default function ModalEditUser({
               fields={{
                 name,
                 type: 'text',
-                placeholder: `Escribe tu ${label}`
+                placeholder
               }}
             />
           </section>

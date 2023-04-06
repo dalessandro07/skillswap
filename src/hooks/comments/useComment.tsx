@@ -4,6 +4,8 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react'
 import { toast } from 'react-hot-toast'
 import useGetUser from '../session/useGetUser'
 import { useProjectsStore } from '@/context/useProjectsStore'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { newCommentSchema } from '@/utils/zodSchemas'
 
 export default function useComment(projectId: number) {
   const supabaseClient = useSupabaseClient()
@@ -28,7 +30,8 @@ export default function useComment(projectId: number) {
       createdAt: `${new Date().toISOString().split('.')[0]}`,
       updatedAt: `${new Date().toISOString().split('.')[0]}`,
       likes: []
-    }
+    },
+    resolver: zodResolver(newCommentSchema)
   })
 
   async function handleComment(commentData: CommentType) {

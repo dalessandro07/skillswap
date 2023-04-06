@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@formkit/auto-animate': 1.0.0-beta.6
+  '@hookform/resolvers': ^3.0.1
   '@supabase/auth-helpers-nextjs': ^0.5.6
   '@supabase/auth-helpers-react': ^0.3.1
   '@supabase/supabase-js': ^2.12.1
@@ -21,10 +22,12 @@ specifiers:
   react-hot-toast: ^2.4.0
   tailwindcss: ^3.3.0
   typescript: 5.0.2
+  zod: ^3.21.4
   zustand: ^4.3.6
 
 dependencies:
   '@formkit/auto-animate': 1.0.0-beta.6
+  '@hookform/resolvers': 3.0.1_react-hook-form@7.43.8
   '@supabase/auth-helpers-nextjs': 0.5.6_pz5pnydt2nehkak4aetyy3l46i
   '@supabase/auth-helpers-react': 0.3.1_pz5pnydt2nehkak4aetyy3l46i
   '@supabase/supabase-js': 2.12.1
@@ -43,6 +46,7 @@ dependencies:
   react-hot-toast: 2.4.0_biqbaboplfbrettd7655fr4n2y
   tailwindcss: 3.3.0_postcss@8.4.21
   typescript: 5.0.2
+  zod: 3.21.4
   zustand: 4.3.6_react@18.2.0
 
 devDependencies:
@@ -189,6 +193,14 @@ packages:
 
   /@formkit/auto-animate/1.0.0-beta.6:
     resolution: {integrity: sha512-PVDhLAlr+B4Xb7e+1wozBUWmXa6BFU8xUPR/W/E+TsQhPS1qkAdAsJ25keEnFrcePSnXHrOsh3tiFbEToOzV9w==}
+    dev: false
+
+  /@hookform/resolvers/3.0.1_react-hook-form@7.43.8:
+    resolution: {integrity: sha512-n5oOt0cLw9mQNW3/k9zWaPsNWQcc0k6Jpc7XUrg2Q/AqqsHp3IVa1juqHCxczXI6uXHBa69ILc4pdtsRGyuzsw==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.43.8_react@18.2.0
     dev: false
 
   /@humanwhocodes/config-array/0.11.8:
@@ -3618,6 +3630,10 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+    dev: false
+
+  /zod/3.21.4:
+    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false
 
   /zustand/4.3.6_react@18.2.0:

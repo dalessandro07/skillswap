@@ -4,6 +4,7 @@ import type { Field, FieldErrors, UseFormRegister } from 'react-hook-form'
 export interface UserDataType {
   fullName: string
   username: string
+  portfolio: string
   email: string
   password: string
 }
@@ -37,6 +38,7 @@ export interface ProjectType {
     username: string
     fullName: string
     avatar_url: string
+    portfolio: string
   }
   url: string
   likes: LikeType[]
@@ -73,6 +75,7 @@ export interface ProjectsStoreType {
 export interface EditUserType {
   fullName: string
   avatar_url: string
+  portfolio: string
 }
 
 export type FieldValuesType = UserDataType &

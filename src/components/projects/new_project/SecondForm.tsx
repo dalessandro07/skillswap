@@ -74,8 +74,7 @@ export default function SecondForm({
             { value: 'mobile', label: 'Mobile' },
             { value: 'devops', label: 'DevOps' },
             { value: 'ux/ui', label: 'UX/UI' },
-            { value: 'game', label: 'Game Development' },
-            { value: 'other', label: 'Otro' }
+            { value: 'game', label: 'Game Development' }
           ]
         }}>
         Categoría

@@ -6,13 +6,16 @@ import { toast } from 'react-hot-toast'
 import useGetUser from '../session/useGetUser'
 import useValidateUniqueProject from './useValidateUniqueProject'
 import useGetDataFromWebsite from './useGetDataFromWebsite'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { newProjectFirstSchema, newProjectSecondSchema } from '@/utils/zodSchemas'
 
 export default function useNewProject(
   defaultValues: Partial<ProjectType> = {
     creator: {
       username: '',
       fullName: '',
-      avatar_url: ''
+      avatar_url: '',
+      portfolio: ''
     },
     updatedAt: `${new Date().toISOString().split('.')[0]}`,
     title: '',
@@ -23,7 +26,8 @@ export default function useNewProject(
     likes: [],
     comments: []
   },
-  type: 'new' | 'edit' = 'new'
+  type: 'new' | 'edit' = 'new',
+  viewSecondForm?: boolean
 ) {
   const supabaseClient = useSupabaseClient()
   const router = useRouter()
@@ -47,7 +51,8 @@ export default function useNewProject(
         fullName,
         avatar_url
       }
-    }
+    },
+    resolver: zodResolver(viewSecondForm ? newProjectSecondSchema : newProjectFirstSchema)
   })
 
   const { validateUniqueProject } = useValidateUniqueProject()

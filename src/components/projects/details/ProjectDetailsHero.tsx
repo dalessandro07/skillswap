@@ -11,8 +11,18 @@ function ProjectDetailsHero({ project }: { project: ProjectType }) {
     <article className="flex flex-col gap-2 w-full py-6">
       <section className="flex items-center gap-2 px-2">
         <UserAvatar size="sm" user={project.creator} />
-        <p className="hidden font-bold lg:flex gap-2">{project.creator.fullName} ·</p>
-        <p className="text-gray-300">@{project.creator.username} ·</p>
+        <a
+          href={project.creator.portfolio}
+          target="_blank"
+          className="hidden font-bold lg:flex gap-2 hover:text-orange-500 transition-all duration-200">
+          {project.creator.fullName} ·
+        </a>
+        <a
+          href={project.creator.portfolio}
+          target="_blank"
+          className="text-gray-300 hover:text-orange-500 transition-all duration-200">
+          @{project.creator.username} ·
+        </a>
         <p className="text-gray-300">{creationDate}</p>
       </section>
 
