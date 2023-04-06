@@ -4,6 +4,7 @@ import { User } from '@supabase/supabase-js'
 import { useState } from 'react'
 import IconEditUser from '../auth/IconEditUser'
 import ModalEditUser from './ModalEditUser'
+import Link from 'next/link'
 
 export default function UserInfoSection({ user }: { user: User }) {
   const [showEditPhoto, setShowEditPhoto] = useState(false)
@@ -18,7 +19,7 @@ export default function UserInfoSection({ user }: { user: User }) {
   }
 
   return (
-    <article className="flex flex-col justify-center pr-10 gap-10 border-r border-b border-gray-600">
+    <article className="flex flex-col justify-center pr-10 gap-10 md:border-r md:border-b md:border-gray-600">
       <section className="flex flex-col gap-5">
         <article className="flex items-start">
           <UserAvatar user={user} size="lg" />
@@ -66,7 +67,9 @@ export default function UserInfoSection({ user }: { user: User }) {
         </p>
       </section>
 
-      <SignOut />
+      <section className="hidden md:flex">
+        <SignOut />
+      </section>
 
       {showEditName && <ModalEditUser toggleShow={toggleShowName} label="nombre" name="fullName" />}
       {showEditPhoto && (

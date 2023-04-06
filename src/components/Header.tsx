@@ -24,7 +24,7 @@ function Header() {
         {user ? (
           <>
             <Link
-              className="text-sm hover:text-orange-500 transition-colors duration-200 hover:border-orange-600 border-b border-transparent"
+              className="hidden sm:flex text-sm hover:text-orange-500 transition-colors duration-200 hover:border-orange-600 border-b border-transparent"
               href="/projects/new_project">
               Nuevo proyecto
             </Link>

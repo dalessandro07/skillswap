@@ -16,16 +16,14 @@ export default function ProjectComments({ project }: { project: ProjectType }) {
                 </p>
               </article>
 
-              <article>
-                <p className="flex gap-1.5 text-sm text-gray-500">
-                  En respuesta a
-                  <span className="font-bold text-orange-500 opacity-75">
-                    @{project.creator.username}
-                  </span>
-                  sobre
-                  <span className="font-bold text-orange-500 opacity-75">{project.title}</span>
-                </p>
-              </article>
+              <p className="flex flex-wrap py-2 md:py-0 gap-1.5 text-sm text-gray-500">
+                En respuesta a
+                <span className="font-bold text-orange-500 opacity-75">
+                  @{project.creator.username}
+                </span>
+                sobre
+                <span className="font-bold text-orange-500 opacity-75">{project.title}</span>
+              </p>
             </section>
 
             <article className="flex flex-col">
