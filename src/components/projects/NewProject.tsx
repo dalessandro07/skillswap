@@ -16,7 +16,7 @@ function NewProject({
   type?: 'new' | 'edit'
   defaultValues?: Partial<ProjectType> | undefined
 }) {
-  const { user } = useGetUser()
+  const { user, loading } = useGetUser()
   const router = useRouter()
   const [viewSecondForm, setViewSecondForm] = useState(type === 'edit' ? true : false)
 
@@ -27,7 +27,8 @@ function NewProject({
     isLoading,
     register,
     getDataFromWebsite,
-    takeScreenshotFromWebsite
+    takeScreenshotFromWebsite,
+    imageValue
   } = useNewProject(type === 'edit' ? defaultValues : undefined, type, viewSecondForm)
 
   const submitFn = viewSecondForm
@@ -39,7 +40,7 @@ function NewProject({
       })
 
   useEffect(() => {
-    if (!user) {
+    if (!user && !loading) {
       toast.error('Inicia sesión para poder crear un proyecto.')
       router.push('/login')
     }
@@ -48,24 +49,35 @@ function NewProject({
       toast.error('No tienes permisos para editar este proyecto')
       router.push('/projects')
     }
-  }, [type, user, defaultValues?.creator_id, router])
+  }, [type, user, defaultValues?.creator_id, router, loading])
 
   return (
-    <form className="flex flex-col grow justify-evenly gap-5 py-10" onSubmit={submitFn} action="">
+    <form
+      className="flex flex-col grow justify-evenly gap-5 py-10 lg:w-3/4 lg:mx-auto"
+      onSubmit={submitFn}
+      action="">
       <h1 className="text-lg font-bold flex gap-2 items-baseline">
         {type === 'new' ? 'Nuevo proyecto' : 'Editar proyecto'}
-        <span className="text-gray-500 text-sm">
+        <span className="text-gray-500 font-normal text-xs">
           {viewSecondForm ? 'Paso 2 de 2' : 'Paso 1 de 2'}
         </span>
       </h1>
 
       <Timeline viewSecondForm={viewSecondForm} setViewSecondForm={setViewSecondForm} />
 
-      {!viewSecondForm ? (
-        <FirstForm errors={errors} register={register} isLoading={isLoading} />
-      ) : (
-        <SecondForm errors={errors} register={register} isLoading={isLoading} type={type} />
-      )}
+      <footer className="w-full">
+        {!viewSecondForm ? (
+          <FirstForm errors={errors} register={register} isLoading={isLoading} />
+        ) : (
+          <SecondForm
+            imageValue={imageValue}
+            errors={errors}
+            register={register}
+            isLoading={isLoading}
+            type={type}
+          />
+        )}
+      </footer>
     </form>
   )
 }

@@ -41,6 +41,7 @@ export default function useNewProject(
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isLoading },
     setValue
   } = useForm<ProjectType>({
@@ -107,6 +108,8 @@ export default function useNewProject(
     toast.success(`¡Proyecto ${title} editado con éxito!`)
   }
 
+  const imageValue = watch('image')
+
   return {
     handleAddProject,
     isLoading,
@@ -114,6 +117,7 @@ export default function useNewProject(
     takeScreenshotFromWebsite,
     register,
     handleSubmit,
-    errors
+    errors,
+    imageValue
   }
 }

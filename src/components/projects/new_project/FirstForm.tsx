@@ -13,7 +13,7 @@ export default function FirstForm({
   isLoading: boolean
 }) {
   return (
-    <>
+    <section className="flex flex-col gap-4 w-full">
       <Input
         register={register}
         errors={errors}
@@ -22,7 +22,7 @@ export default function FirstForm({
           type: 'text',
           placeholder: 'Ej. https://skillswap.vercel.app'
         }}>
-        <p className="flex gap-1 items-baseline">
+        <p className="flex flex-col sm:flex-row gap-1 items-baseline">
           Ingresa la URL del proyecto
           <span className="text-gray-500 text-sm">(para obtener los metadatos)</span>
         </p>
@@ -35,6 +35,6 @@ export default function FirstForm({
         }}>
         {isLoading ? 'Obteniendo...' : 'Obtener datos'}
       </HeroButton>
-    </>
+    </section>
   )
 }

@@ -1,5 +1,6 @@
 import type { InputPropsType } from '@/types'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import Image from 'next/image'
 import { memo } from 'react'
 
 function Input({ fields, children, register, errors }: InputPropsType) {
@@ -13,7 +14,7 @@ function Input({ fields, children, register, errors }: InputPropsType) {
       <div className="flex flex-col py-2">
         <input
           className={`
-          border-b p-2 focus:outline-none bg-transparent
+          border-b p-2 focus:outline-none
           ${hasError ? 'border-red-500' : 'border-gray-300'}
         `}
           {...register(fields.name, {

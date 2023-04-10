@@ -5,7 +5,7 @@ export default function SignOut() {
 
   return (
     <button
-      className="px-3.5 py-1.5 rounded-sm w-max bg-red-600 hover:bg-red-700 transition-colors duration-200 flex gap-1 items-center text-sm"
+      className="text-gray-200 hover:bg-gray-600/70 hover:border-gray-600/70 px-3 py-1.5 rounded-sm w-max border border-gray-300/80transition-all duration-200 flex gap-1 items-center text-sm"
       disabled={loading}
       onClick={handleSignOut}>
       <svg

@@ -3,12 +3,14 @@ lockfileVersion: 5.4
 specifiers:
   '@formkit/auto-animate': 1.0.0-beta.6
   '@hookform/resolvers': ^3.0.1
+  '@lottiefiles/react-lottie-player': ^3.5.3
   '@supabase/auth-helpers-nextjs': ^0.5.6
   '@supabase/auth-helpers-react': ^0.3.1
   '@supabase/supabase-js': ^2.12.1
   '@types/node': 18.15.7
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
+  '@types/react-lottie': ^1.2.6
   autoprefixer: ^10.4.14
   cz-conventional-changelog: ^3.3.0
   eslint: 8.36.0
@@ -28,12 +30,14 @@ specifiers:
 dependencies:
   '@formkit/auto-animate': 1.0.0-beta.6
   '@hookform/resolvers': 3.0.1_react-hook-form@7.43.8
+  '@lottiefiles/react-lottie-player': 3.5.3_react@18.2.0
   '@supabase/auth-helpers-nextjs': 0.5.6_pz5pnydt2nehkak4aetyy3l46i
   '@supabase/auth-helpers-react': 0.3.1_pz5pnydt2nehkak4aetyy3l46i
   '@supabase/supabase-js': 2.12.1
   '@types/node': 18.15.7
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
+  '@types/react-lottie': 1.2.6
   autoprefixer: 10.4.14_postcss@8.4.21
   eslint: 8.36.0
   eslint-config-next: 13.2.4_j4766f7ecgqbon3u7zlxn5zszu
@@ -241,6 +245,15 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
     optional: true
+
+  /@lottiefiles/react-lottie-player/3.5.3_react@18.2.0:
+    resolution: {integrity: sha512-6pGbiTMjGnPddR1ur8M/TIDCiogZMc1aKIUbMEKXKAuNeYwZ2hvqwBJ+w5KRm88ccdcU88C2cGyLVsboFlSdVQ==}
+    peerDependencies:
+      react: 16 - 18
+    dependencies:
+      lottie-web: 5.11.0
+      react: 18.2.0
+    dev: false
 
   /@next/env/13.2.4:
     resolution: {integrity: sha512-+Mq3TtpkeeKFZanPturjcXt+KHfKYnLlX6jMLyCrmpq6OOs4i1GqBOAauSkii9QeKCMTYzGppar21JU57b/GEA==}
@@ -530,6 +543,12 @@ packages:
 
   /@types/react-dom/18.0.11:
     resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
+    dependencies:
+      '@types/react': 18.0.28
+    dev: false
+
+  /@types/react-lottie/1.2.6:
+    resolution: {integrity: sha512-fvGJHD7SeUdVESHo7f7erRnXkTWaa/6Mo5TB+R0/ieSftKoFspA4sMlF2qMH6BljXI7ehFJbBtrD5bzDxPCkGg==}
     dependencies:
       '@types/react': 18.0.28
     dev: false
@@ -2408,6 +2427,10 @@ packages:
     hasBin: true
     dependencies:
       js-tokens: 4.0.0
+    dev: false
+
+  /lottie-web/5.11.0:
+    resolution: {integrity: sha512-9vSt0AtdOH98GKDXwD5LPfFg9Pcmxt5+1BllAbudKM5iqPxpJnJUfuGaP45OyudDrESCOBgsjnntVUTygBNlzw==}
     dev: false
 
   /lru-cache/6.0.0:

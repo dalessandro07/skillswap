@@ -32,7 +32,7 @@ export default function UserInfoSection({ user }: { user: User }) {
         </article>
 
         <article className="flex gap-1">
-          <h1 className="flex gap-1.5 text-gray-300">
+          <h1 className="flex gap-1.5 text-gray-400">
             Bienvenido,
             <span className="text-white">
               @{user.user_metadata.username || user.user_metadata.email.split('@')[0]}
@@ -54,9 +54,9 @@ export default function UserInfoSection({ user }: { user: User }) {
         </article>
       </section>
 
-      <section className="flex flex-col">
+      <section className="flex flex-col gap-5 xs:gap-2">
         <article className="flex gap-2 items-center">
-          <p className="flex gap-1.5 text-gray-300">
+          <p className="flex flex-col xs:flex-row xs:gap-1.5 text-gray-400">
             Nombre:
             <span className="text-white">
               {user.user_metadata.fullName || user.user_metadata.full_name}
@@ -67,7 +67,7 @@ export default function UserInfoSection({ user }: { user: User }) {
         </article>
 
         <article className="flex gap-2 items-center">
-          <p className="flex gap-1.5 text-gray-300">
+          <p className="flex flex-col xs:flex-row xs:gap-1.5 text-gray-400">
             Portafolio:
             <span className="text-white">{user.user_metadata.portfolio}</span>
           </p>
@@ -75,7 +75,7 @@ export default function UserInfoSection({ user }: { user: User }) {
           <IconEditUser toggleShow={toggleShowPortfolio} field="portfolio" />
         </article>
 
-        <p className="text-gray-300">
+        <p className="text-gray-400">
           Correo: <span className="text-white">{user.email}</span>
         </p>
       </section>

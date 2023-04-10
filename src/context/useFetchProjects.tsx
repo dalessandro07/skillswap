@@ -20,6 +20,7 @@ export const useFetchProjects = (supabaseClient: SupabaseClient) => {
         .from('projects')
         .select('*')
         .order('likes')
+        .range(0, 10)
 
       setLoading({ id, status: false })
 

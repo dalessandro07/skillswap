@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: JSX.Element }) {
         <meta name="color-scheme" content="dark light" />
       </Head>
 
-      <div className="flex flex-col min-h-screen justify-between p-5">
+      <div className="flex flex-col min-h-screen justify-between px-8 py-5">
         <Header />
         <main style={inter.style} className="flex flex-col grow">
           {children}
