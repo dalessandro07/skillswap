@@ -1,8 +1,9 @@
 import useRouteTitle from '@/hooks/projects/useRouteTitle'
 import { CommentType } from '@/types'
 import Link from 'next/link'
+import { memo } from 'react'
 
-export default function CommentButton({
+function CommentButton({
   comments,
   projectId,
   projectTitle,
@@ -68,3 +69,5 @@ export default function CommentButton({
     </div>
   )
 }
+
+export default memo(CommentButton)

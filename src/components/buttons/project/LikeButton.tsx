@@ -1,9 +1,9 @@
 import { useProjectsStore } from '@/context/useProjectsStore'
 import useLikes from '@/hooks/projects/useLikes'
 import useGetUser from '@/hooks/session/useGetUser'
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 
-export default function LikeButton({
+function LikeButton({
   likes,
   projectId,
   destination = 'project',
@@ -84,3 +84,5 @@ export default function LikeButton({
     </div>
   )
 }
+
+export default memo(LikeButton)

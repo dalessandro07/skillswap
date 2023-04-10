@@ -1,6 +1,7 @@
 import { CommentType } from '@/types'
 import CommentButton from '../buttons/project/CommentButton'
 import LikeButton from '../buttons/project/LikeButton'
+import ShareProjectButton from '../buttons/project/ShareProjectButton'
 
 export default function ProjectReactions({
   comments,
@@ -19,8 +20,6 @@ export default function ProjectReactions({
 }) {
   return (
     <article className="flex items-center gap-4">
-      {/* Comments */}
-
       <CommentButton
         comments={comments}
         projectId={projectId}
@@ -29,9 +28,9 @@ export default function ProjectReactions({
         toggleViewComments={toggleViewComments}
       />
 
-      {/* Likes */}
-
       <LikeButton likes={likes} projectId={projectId} />
+
+      <ShareProjectButton projectId={projectId} />
     </article>
   )
 }
