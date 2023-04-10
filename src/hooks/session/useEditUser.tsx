@@ -16,12 +16,12 @@ export default function useEditUser() {
     formState: { errors, isSubmitting }
   } = useForm<EditUserType>({
     mode: 'onChange',
+    resolver: zodResolver(editUserSchema),
     defaultValues: {
       fullName: user?.user_metadata?.fullName || user?.user_metadata?.full_name || '',
       avatar_url: user?.user_metadata?.avatar_url || '',
       portfolio: user?.user_metadata?.portfolio || ''
-    },
-    resolver: zodResolver(editUserSchema)
+    }
   })
 
   async function handleEdit(userData: EditUserType) {

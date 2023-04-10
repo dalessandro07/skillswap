@@ -75,7 +75,7 @@ export default function useLikeComments({ projectId }: { projectId: number }) {
 
     if (!commentToLike) return
 
-    const commentIsLiked = commentToLike.likes.some((like) => like.creator_id === user.id)
+    const commentIsLiked = commentToLike.likes?.some((like) => like.creator_id === user.id)
 
     if (commentIsLiked) {
       return toggleLikeComment({ projectId, commentId, likeOrUnlike: 'unlike' })

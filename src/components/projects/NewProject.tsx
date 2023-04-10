@@ -20,13 +20,21 @@ function NewProject({
   const router = useRouter()
   const [viewSecondForm, setViewSecondForm] = useState(type === 'edit' ? true : false)
 
-  const { errors, handleAddProject, handleSubmit, isLoading, register, getDataFromWebsite } =
-    useNewProject(type === 'edit' ? defaultValues : undefined, type, viewSecondForm)
+  const {
+    errors,
+    handleAddProject,
+    handleSubmit,
+    isLoading,
+    register,
+    getDataFromWebsite,
+    takeScreenshotFromWebsite
+  } = useNewProject(type === 'edit' ? defaultValues : undefined, type, viewSecondForm)
 
   const submitFn = viewSecondForm
     ? handleSubmit(handleAddProject)
     : handleSubmit((data) => {
         getDataFromWebsite(data)
+        takeScreenshotFromWebsite(data)
         setViewSecondForm(true)
       })
 

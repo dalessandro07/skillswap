@@ -34,7 +34,7 @@ export default function ProjectComments({ project }: { project: ProjectType }) {
           <p className="text-sm">{comment.content}</p>
 
           <LikeButton
-            likes={comment.likes.length}
+            likes={comment.likes?.length}
             projectId={project.id}
             commentId={comment.id}
             destination="comment"

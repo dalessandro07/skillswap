@@ -27,7 +27,7 @@ export default function LikeButton({
   }, [projects, setLikedProjects, user])
 
   const isProjectLiked = projects.some((project) => {
-    return project.id === projectId && project.likes.some((like) => like.creator_id === user?.id)
+    return project.id === projectId && project.likes?.some((like) => like.creator_id === user?.id)
   })
 
   const isCommentLiked = projects.some(
@@ -35,7 +35,7 @@ export default function LikeButton({
       project.id === projectId &&
       project.comments.some(
         (comment) =>
-          comment.id === commentId && comment.likes.some((like) => like.creator_id === user?.id)
+          comment.id === commentId && comment.likes?.some((like) => like.creator_id === user?.id)
       )
   )
 

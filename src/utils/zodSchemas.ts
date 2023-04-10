@@ -65,6 +65,15 @@ export const newProjectFirstSchema = z.object({
 })
 
 export const newProjectSecondSchema = z.object({
+  creator: z.object({
+    username: z.string().default(''),
+    fullName: z.string().default(''),
+    avatar_url: z.string().default(''),
+    portfolio: z.string().default('')
+  }),
+  updatedAt: z
+    .string()
+    .default(() => `${new Date().toISOString().split('.')[0]}`),
   title: z
     .string()
     .min(3, {
@@ -97,12 +106,16 @@ export const newProjectSecondSchema = z.object({
   ]),
   url: z.string().url({
     message: 'Debes ingresar una URL válida (incluyendo https://).'
-  })
+  }),
+  likes: z.array(z.string()).default(() => []),
+  comments: z.array(z.string()).default(() => [])
 })
 
 /* Comment Schemas */
 
 export const newCommentSchema = z.object({
+  id: z.string().default(''),
+  author: z.string().default(''),
   content: z
     .string()
     .min(4, {
@@ -110,5 +123,12 @@ export const newCommentSchema = z.object({
     })
     .max(500, {
       message: 'El comentario debe tener menos de 500 caracteres.'
-    })
+    }),
+  createdAt: z
+    .string()
+    .default(() => `${new Date().toISOString().split('.')[0]}`),
+  updatedAt: z
+    .string()
+    .default(() => `${new Date().toISOString().split('.')[0]}`),
+  likes: z.array(z.string()).default(() => [])
 })

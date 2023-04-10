@@ -16,14 +16,14 @@ export default function useRegister() {
     formState: { errors, isSubmitting: isLoading }
   } = useForm<UserDataType>({
     mode: 'onChange',
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       fullName: '',
       username: '',
       portfolio: '',
       email: '',
       password: ''
-    },
-    resolver: zodResolver(registerSchema)
+    }
   })
 
   async function handleRegister(userData: UserDataType) {

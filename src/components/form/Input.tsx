@@ -1,9 +1,9 @@
 import type { InputPropsType } from '@/types'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { memo } from 'react'
 
-export default function Input({ fields, children, register, errors }: InputPropsType) {
+function Input({ fields, children, register, errors }: InputPropsType) {
   const hasError = errors[fields.name]
-
   const [parent] = useAutoAnimate()
 
   return (
@@ -25,6 +25,7 @@ export default function Input({ fields, children, register, errors }: InputProps
           type={fields.type}
           placeholder={fields.placeholder}
         />
+
         <div ref={parent}>
           {hasError && (
             <span className="text-red-500 text-sm">{errors[fields.name]?.message as string}</span>
@@ -34,3 +35,5 @@ export default function Input({ fields, children, register, errors }: InputProps
     </div>
   )
 }
+
+export default memo(Input)

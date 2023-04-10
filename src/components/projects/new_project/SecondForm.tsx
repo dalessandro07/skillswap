@@ -2,6 +2,7 @@ import HeroButton from '@/components/buttons/HeroButton'
 import Input from '@/components/form/Input'
 import Select from '@/components/form/Select'
 import type { ProjectType, InputFieldsType } from '@/types'
+import { memo } from 'react'
 import type { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 
 const PROJECT_FIELDS: InputFieldsType[] = [
@@ -21,7 +22,7 @@ const PROJECT_FIELDS: InputFieldsType[] = [
     name: 'image',
     type: 'text',
     placeholder: 'Ej. https://i.imgur.com/hMGfX6f.png',
-    label: 'Imagen (i.imgur, netlify, vercel, etc.)'
+    label: 'Imagen de portada'
   },
   {
     name: 'url',
@@ -31,7 +32,7 @@ const PROJECT_FIELDS: InputFieldsType[] = [
   }
 ]
 
-export default function SecondForm({
+function SecondForm({
   register,
   errors,
   isLoading,
@@ -90,3 +91,5 @@ export default function SecondForm({
     </>
   )
 }
+
+export default memo(SecondForm)

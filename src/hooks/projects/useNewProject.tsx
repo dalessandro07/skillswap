@@ -8,6 +8,7 @@ import useValidateUniqueProject from './useValidateUniqueProject'
 import useGetDataFromWebsite from './useGetDataFromWebsite'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { newProjectFirstSchema, newProjectSecondSchema } from '@/utils/zodSchemas'
+import useTakeScreenshot from './useTakeScreenshot'
 
 export default function useNewProject(
   defaultValues: Partial<ProjectType> = {
@@ -44,6 +45,7 @@ export default function useNewProject(
     setValue
   } = useForm<ProjectType>({
     mode: 'onChange',
+    resolver: zodResolver(viewSecondForm ? newProjectSecondSchema : newProjectFirstSchema),
     defaultValues: {
       ...defaultValues,
       creator: {
@@ -51,56 +53,65 @@ export default function useNewProject(
         fullName,
         avatar_url
       }
-    },
-    resolver: zodResolver(viewSecondForm ? newProjectSecondSchema : newProjectFirstSchema)
+    }
   })
 
   const { validateUniqueProject } = useValidateUniqueProject()
   const { getDataFromWebsite } = useGetDataFromWebsite(setValue)
+  const { takeScreenshotFromWebsite } = useTakeScreenshot(setValue)
 
   async function handleAddProject(projectData: Partial<ProjectType>) {
-    const { title, description, image, category, url } = projectData
+    const { title, description, image, category } = projectData
 
     if (!title || !description || !image || !category) {
       return toast.error('Todos los campos son requeridos')
     }
 
     if (type === 'new') {
-      const errorMessage = await validateUniqueProject(projectData)
-
-      if (errorMessage) {
-        return toast.error(errorMessage)
-      }
-
-      const { error } = await supabaseClient.from('projects').insert({
-        ...projectData,
-        creator_id: user?.id
-      })
-
-      if (error) return toast.error(error.message)
-
-      toast.success(`¡Proyecto ${title} creado con éxito!`)
+      await addNewProject(projectData, title)
     } else {
-      const { error } = await supabaseClient
-        .from('projects')
-        .update({
-          ...projectData,
-          creator_id: user?.id
-        })
-        .eq('id', projectData.id)
-
-      if (error) return toast.error(error.message)
-
-      toast.success(`¡Proyecto ${title} editado con éxito!`)
+      await editProject(projectData, title)
     }
 
     router.push('/projects')
+  }
+
+  async function addNewProject(projectData: Partial<ProjectType>, title: string) {
+    const errorMessage = await validateUniqueProject(projectData)
+
+    if (errorMessage) {
+      return toast.error(errorMessage)
+    }
+
+    const { error } = await supabaseClient.from('projects').insert({
+      ...projectData,
+      creator_id: user?.id
+    })
+
+    if (error) return toast.error(error.message)
+
+    toast.success(`¡Proyecto ${title} creado con éxito!`)
+  }
+
+  async function editProject(projectData: Partial<ProjectType>, title: string) {
+    const { error } = await supabaseClient
+      .from('projects')
+      .update({
+        ...projectData,
+        creator_id: user?.id
+      })
+      .eq('id', projectData.id)
+
+    if (error) return toast.error(error.message)
+
+    toast.success(`¡Proyecto ${title} editado con éxito!`)
   }
 
   return {
     handleAddProject,
     isLoading,
     getDataFromWebsite,
+    takeScreenshotFromWebsite,
     register,
     handleSubmit,
     errors

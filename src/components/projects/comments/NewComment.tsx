@@ -20,6 +20,7 @@ export default function NewComment({ project }: { project: ProjectType }) {
 
         <button
           type="submit"
+          disabled={isLoading}
           className="hover:scale-125 transition-all duration-200 hover:text-orange-500 p-1 hover:animate-pulse"
           aria-label="Comentar">
           <svg
