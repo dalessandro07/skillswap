@@ -3,12 +3,12 @@ import { memo } from 'react'
 
 function Footer() {
   return (
-    <footer className="p-5 flex w-full justify-between">
+    <footer className="p-5 flex items-center flex-col md:flex-row gap-8 w-full justify-between">
       <section className="flex items-center gap-4">
         <Image src="/skillswap.png" alt="Logo de Skillswap" width={40} height={40} />
 
         <article className="flex flex-col">
-          <p className="flex gap-1 text-sm">
+          <p className="flex flex-wrap gap-1 text-sm">
             Desarrollado por
             <a
               className="hover:text-blue-600 transition-colors duration-150 hover:border-blue-600 border-b border-transparent"
@@ -17,7 +17,7 @@ function Footer() {
               Alessandro Rios
             </a>
           </p>
-          <p className="flex gap-1 text-xs text-gray-500">
+          <p className="flex flex-wrap gap-1 text-xs text-gray-500">
             Sitio protegido por reCAPTCHA, aplican
             <a
               target="_blank"

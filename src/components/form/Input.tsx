@@ -1,6 +1,5 @@
 import type { InputPropsType } from '@/types'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
-import Image from 'next/image'
 import { memo } from 'react'
 
 function Input({ fields, children, register, errors }: InputPropsType) {

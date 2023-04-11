@@ -10,7 +10,10 @@ function ProjectDetailsHero({ project }: { project: ProjectType }) {
   return (
     <article className="flex flex-col gap-2 w-full py-6">
       <section className="flex items-center gap-2 px-2">
-        <UserAvatar size="sm" user={project.creator} />
+        <a href={project.creator.portfolio} target="_blank">
+          <UserAvatar size="sm" user={project.creator} />
+        </a>
+
         <a
           href={project.creator.portfolio}
           target="_blank"

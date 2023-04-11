@@ -50,25 +50,23 @@ function UserAvatar({
 
   return (
     <section className="w-max">
-      <a href={selectedUser.portfolio} target="_blank">
-        {selectedUser.avatar_url ? (
-          <article className={`${avatarLetterSize}`}>
-            <Image
-              className="text-white object-cover rounded-full w-full h-full object-left-top"
-              src={selectedUser.avatar_url}
-              alt="User avatar"
-              width={avatarImageSize}
-              height={avatarImageSize}
-            />
-          </article>
-        ) : (
-          <div
-            className={`${avatarLetterSize} rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-tr from-orange-500 to-orange-700 uppercase overflow-hidden`}>
-            {avatarLetter}
-          </div>
-        )}
-        <span className="sr-only">Ver perfil de {selectedUser.username}</span>
-      </a>
+      {selectedUser.avatar_url ? (
+        <article className={`${avatarLetterSize}`}>
+          <Image
+            className="text-white object-cover rounded-full w-full h-full object-left-top"
+            src={selectedUser.avatar_url}
+            alt="User avatar"
+            width={avatarImageSize}
+            height={avatarImageSize}
+          />
+        </article>
+      ) : (
+        <div
+          className={`${avatarLetterSize} rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-tr from-orange-500 to-orange-700 uppercase overflow-hidden`}>
+          {avatarLetter}
+        </div>
+      )}
+      <span className="sr-only">Ver perfil de {selectedUser.username}</span>
     </section>
   )
 }

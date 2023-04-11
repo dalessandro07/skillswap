@@ -16,7 +16,9 @@ function Project({ project }: { project: ProjectType }) {
     <section className="flex flex-col gap-4">
       <article className="flex flex-col grow gap-2">
         <div className="flex items-center gap-1 pl-0.5">
-          <UserAvatar user={project.creator} size="xs" />
+          <a href={project.creator.portfolio} target="_blank">
+            <UserAvatar user={project.creator} size="xs" />
+          </a>
 
           <a
             href={project.creator.portfolio}

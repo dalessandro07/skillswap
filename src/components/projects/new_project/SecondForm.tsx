@@ -34,7 +34,7 @@ const PROJECT_FIELDS: InputFieldsType[] = [
   }
 ]
 
-function SecondForm({
+export default function SecondForm({
   register,
   errors,
   isLoading,
@@ -56,7 +56,6 @@ function SecondForm({
   }
 
   const isValidImage = validateImageValue(imageValue || '')
-
   const [parent] = useAutoAnimate()
 
   return (
@@ -118,5 +117,3 @@ function SecondForm({
     </section>
   )
 }
-
-export default memo(SecondForm)

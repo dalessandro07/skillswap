@@ -45,7 +45,7 @@ export default function useNewProject(
     formState: { errors, isLoading },
     setValue
   } = useForm<ProjectType>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: zodResolver(viewSecondForm ? newProjectSecondSchema : newProjectFirstSchema),
     defaultValues: {
       ...defaultValues,

@@ -1,7 +1,8 @@
 import type { SelectPropsType } from '@/types'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { memo } from 'react'
 
-export default function Select({ fields, children, register, errors }: SelectPropsType) {
+function Select({ fields, children, register, errors }: SelectPropsType) {
   const hasError = errors[fields.name]
 
   const [parent] = useAutoAnimate()
@@ -44,3 +45,5 @@ export default function Select({ fields, children, register, errors }: SelectPro
     </div>
   )
 }
+
+export default memo(Select)
