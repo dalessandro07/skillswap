@@ -3,6 +3,8 @@ import LikeButton from '@/components/buttons/project/LikeButton'
 import type { ProjectType } from '@/types'
 
 export default function ProjectComments({ project }: { project: ProjectType }) {
+  if (!project) return null
+
   return (
     <article id="comments" className="flex flex-col gap-4 w-full">
       {project.comments.map((comment) => (

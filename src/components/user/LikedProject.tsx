@@ -4,9 +4,11 @@ import Link from 'next/link'
 
 export default function LikedProject({ project }: { project: ProjectType }) {
   const { routeTitle } = useRouteTitle({
-    title: project.title,
-    id: project.id
+    title: project?.title || '',
+    id: project?.id || 0
   })
+
+  if (!project) return null
 
   return (
     <section className="flex items-baseline gap-2" key={project.id}>

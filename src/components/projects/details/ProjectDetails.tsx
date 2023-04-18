@@ -9,6 +9,8 @@ export default function ProjectDetails({ project }: { project: ProjectType }) {
 
   const isCreator = user?.id === project.creator_id
 
+  if (!project) return null
+
   return (
     <section className="flex flex-col items-center md:w-2/3 mx-auto py-12">
       <ProjectDetailsHero project={project} />

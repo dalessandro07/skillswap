@@ -15,6 +15,8 @@ export default function ProjectDetailsInfo({ project }: { project: ProjectType }
 
   const [parent] = useAutoAnimate()
 
+  if (!project) return null
+
   return (
     <article className="flex flex-col justify-center items-center gap-5 p-4 md:p-8 w-full">
       <div className="flex flex-col items-center">

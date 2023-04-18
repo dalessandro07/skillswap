@@ -7,6 +7,8 @@ import { memo } from 'react'
 function ProjectDetailsHero({ project }: { project: ProjectType }) {
   const creationDate = new Date(project.createdAt).toLocaleDateString('es-ES')
 
+  if (!project) return null
+
   return (
     <article className="flex flex-col gap-2 w-full py-6">
       <section className="flex items-center gap-2 px-2">

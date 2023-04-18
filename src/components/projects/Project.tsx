@@ -8,9 +8,11 @@ import { memo } from 'react'
 
 function Project({ project }: { project: ProjectType }) {
   const { routeTitle } = useRouteTitle({
-    title: project.title,
-    id: project.id
+    title: project?.title || '',
+    id: project?.id || 0
   })
+
+  if (!project) return null
 
   return (
     <section className="flex flex-col gap-4">

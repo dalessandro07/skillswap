@@ -5,6 +5,8 @@ import { ProjectType } from '@/types'
 export default function NewComment({ project }: { project: ProjectType }) {
   const { errors, register, handleComment, handleSubmit, isLoading } = useComment(project.id)
 
+  if (!project) return null
+
   return (
     <form className="w-full" onSubmit={handleSubmit(handleComment)} action="">
       <div className="flex items-center gap-2 w-full">
