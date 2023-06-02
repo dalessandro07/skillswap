@@ -14,20 +14,38 @@ function Project({ project }: { project: ProjectType }) {
 
   if (!project) return null
 
+  const [firstName, lastName] = project.creator.fullName.split(' ')
+
+  const creatorName =
+    project.creator.username || `${firstName}${lastName ? '-' : ''}${lastName}`.toLowerCase()
+
   return (
     <section className="flex flex-col gap-4">
       <article className="flex flex-col grow gap-2">
         <div className="flex items-center gap-1 pl-0.5">
-          <a href={project.creator.portfolio} target="_blank">
-            <UserAvatar user={project.creator} size="xs" />
-          </a>
+          {project.creator.portfolio ? (
+            <>
+              <a href={project.creator.portfolio} target="_blank">
+                <UserAvatar user={project.creator} size="xs" />
+              </a>
 
-          <a
-            href={project.creator.portfolio}
-            target="_blank"
-            className="text-xs opacity-80 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
-            @{project.creator.username}
-          </a>
+              <a
+                href={project.creator.portfolio}
+                target="_blank"
+                className="text-xs opacity-80 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
+                @{creatorName}
+              </a>
+            </>
+          ) : (
+            <>
+              <UserAvatar user={project.creator} size="xs" />
+
+              <p className="text-xs opacity-80 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
+                @{creatorName}
+              </p>
+            </>
+          )}
+
           <p className="opacity-80">·</p>
           <p className="text-xs opacity-80 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis">
             {new Date(project.createdAt).toLocaleDateString('es-ES')}

@@ -26,15 +26,17 @@ export default function ProjectDetailsInfo({ project }: { project: ProjectType }
 
       <p className="text-sm text-gray-300 text-center md:text-left">{project.description}</p>
 
-      <p className="flex w-full gap-1 text-sm text-gray-400 text-center md:text-left">
-        Visita el portfolio de
-        <a
-          className="text-orange-500 hover:underline"
-          target="_blank"
-          href={project.creator.portfolio}>
-          {project.creator.fullName}
-        </a>
-      </p>
+      {project.creator.portfolio && (
+        <p className="flex w-full gap-1 text-sm text-gray-400 text-center md:text-left">
+          Visita el portfolio de
+          <a
+            className="text-orange-500 hover:underline"
+            target="_blank"
+            href={project.creator.portfolio}>
+            {project.creator.fullName}
+          </a>
+        </p>
+      )}
 
       <ProjectReactions
         comments={project.comments}

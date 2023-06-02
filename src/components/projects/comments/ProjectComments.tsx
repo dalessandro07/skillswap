@@ -23,7 +23,7 @@ export default function ProjectComments({ project }: { project: ProjectType }) {
                 <span className="font-bold text-orange-500 opacity-75">
                   @{project.creator.username}
                 </span>
-                sobre
+                sobre el proyecto
                 <span className="font-bold text-orange-500 opacity-75">{project.title}</span>
               </p>
             </section>
