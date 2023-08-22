@@ -4,7 +4,7 @@ import { memo } from 'react'
 function Footer() {
   return (
     <footer className="p-5 flex items-center flex-col md:flex-row gap-8 w-full justify-between">
-      <section className="flex items-center gap-4">
+      <section className="flex flex-wrap items-center gap-4">
         <Image src="/skillswap.png" alt="Logo de Skillswap" width={40} height={40} />
 
         <article className="flex flex-col">

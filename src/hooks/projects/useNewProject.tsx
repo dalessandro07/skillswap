@@ -86,7 +86,13 @@ export default function useNewProject(
 
     const { error } = await supabaseClient.from('projects').insert({
       ...projectData,
-      creator_id: user?.id
+      creator_id: user?.id,
+      creator: {
+        username: '',
+        fullName: user?.user_metadata.full_name,
+        avatar_url: user?.user_metadata.avatar_url,
+        portfolio: ''
+      }
     })
 
     if (error) return toast.error(error.message)

@@ -8,7 +8,7 @@ function Header() {
   const { user } = useGetUser()
 
   return (
-    <header className="flex items-center justify-between w-full py-5">
+    <header className="flex flex-wrap gap-y-10 items-center justify-between w-full py-5">
       <Link className="flex gap-2 items-end font-bold font-mono" href="/">
         <Image src="/skillswap.png" width={22} height={22} alt="SkillSwap logo" />
         SkillSwap

@@ -19,28 +19,39 @@ function ProjectDetailsHero({ project }: { project: ProjectType }) {
         <a
           href={project.creator.portfolio}
           target="_blank"
-          className="hidden font-bold lg:flex gap-2 hover:text-orange-500 transition-all duration-200">
+          className="hidden font-bold md:flex gap-2 hover:text-orange-500 transition-all duration-200">
           {project.creator.fullName} ·
         </a>
-        <a
-          href={project.creator.portfolio}
-          target="_blank"
-          className="text-gray-300 hover:text-orange-500 transition-all duration-200">
-          @{project.creator.username} ·
-        </a>
+        {project.creator.username ? (
+          <a
+            href={project.creator.portfolio}
+            target="_blank"
+            className="text-gray-300 hover:text-orange-500 transition-all duration-200">
+            @{project.creator.username} ·
+          </a>
+        ) : (
+          <a
+            href={project.creator.portfolio}
+            target="_blank"
+            className="flex font-bold md:hidden gap-2 hover:text-orange-500 transition-all duration-200">
+            {project.creator.fullName} ·
+          </a>
+        )}
         <p className="text-gray-300">{creationDate}</p>
       </section>
 
-      <section className="relative">
-        <Image
-          className="w-full min-h-[55vh] max-h-screen object-cover rounded-sm object-left-top"
-          priority
-          quality={75}
-          src={project.image}
-          alt={project.title}
-          width={200}
-          height={200}
-        />
+      <section className="relative mt-3">
+        <div>
+          <Image
+            className="w-full max-h-screen object-cover rounded-sm object-left-top"
+            priority
+            quality={75}
+            src={project.image}
+            alt={project.title}
+            width={200}
+            height={200}
+          />
+        </div>
 
         <Link
           target="_blank"

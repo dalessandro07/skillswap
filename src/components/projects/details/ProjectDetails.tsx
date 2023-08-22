@@ -12,7 +12,7 @@ export default function ProjectDetails({ project }: { project: ProjectType }) {
   if (!project) return null
 
   return (
-    <section className="flex flex-col items-center md:w-2/3 mx-auto py-12">
+    <section className="flex flex-col items-center w-full md:w-2/3 mx-auto py-12">
       <ProjectDetailsHero project={project} />
 
       <ProjectDetailsInfo project={project} />
