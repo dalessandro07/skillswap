@@ -34,8 +34,12 @@ export default function useNewProject(
   const router = useRouter()
   const { user } = useGetUser()
 
-  const username = user?.user_metadata.username || user?.user_metadata.email.split('@')[0] || ''
-  const fullName = user?.user_metadata.fullName || user?.user_metadata.full_name || ''
+  const username =
+    user?.user_metadata.username ||
+    user?.user_metadata.email.split('@')[0] ||
+    user?.email?.split('@')[0] ||
+    'nuevo-usuario'
+  const fullName = user?.user_metadata.fullName || user?.user_metadata.full_name || 'Nuevo usuario'
   const avatar_url = user?.user_metadata.avatar_url || ''
 
   const {
@@ -86,13 +90,7 @@ export default function useNewProject(
 
     const { error } = await supabaseClient.from('projects').insert({
       ...projectData,
-      creator_id: user?.id,
-      creator: {
-        username: '',
-        fullName: user?.user_metadata.full_name,
-        avatar_url: user?.user_metadata.avatar_url,
-        portfolio: ''
-      }
+      creator_id: user?.id
     })
 
     if (error) return toast.error(error.message)
