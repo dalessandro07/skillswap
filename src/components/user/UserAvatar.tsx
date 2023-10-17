@@ -36,7 +36,7 @@ function UserAvatar({
     }
   }
 
-  const avatarLetter = selectedUser.fullName[0]
+  const avatarLetter = selectedUser?.fullName?.[0] ?? selectedUser?.username?.[0] ?? 'U'
 
   const avatarImageSize = size === 'xs' ? 25 : size === 'sm' ? 35 : size === 'md' ? 60 : 80
   const avatarLetterSize =

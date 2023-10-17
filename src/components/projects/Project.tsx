@@ -14,7 +14,7 @@ function Project({ project }: { project: ProjectType }) {
 
   if (!project) return null
 
-  const [firstName, lastName] = project.creator.fullName.split(' ')
+  const [firstName, lastName] = project.creator.fullName?.split(' ') ?? ['']
 
   const creatorName =
     project.creator.username || `${firstName}${lastName ? '-' : ''}${lastName}`.toLowerCase()
